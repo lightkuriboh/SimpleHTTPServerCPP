@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/DTLMiniProject.dir/main.cpp.o CMakeFiles/DTLMiniProject.dir/SocketUtility/Socket.cpp.o CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o  -o DTLMiniProject 

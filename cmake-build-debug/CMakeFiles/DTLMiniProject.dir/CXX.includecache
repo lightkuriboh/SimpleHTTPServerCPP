@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/Socket.h
+cstring
+-
+cstdio
+-
+sys/socket.h
+-
+netinet/in.h
+-
+unistd.h
+-
+../constants.h
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
+
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.h
+Socket.h
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/Socket.h
+
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
+
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/main.cpp
+iostream
+-
+SocketUtility/TCPSocket.h
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.h
+
