@@ -6,7 +6,37 @@
 
 #IncludeRegexTransform: 
 
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.h
+sys/epoll.h
+-
+
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.cpp
+MockClients.h
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.h
+
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.h
+chrono
+-
+cstring
+-
+iostream
+-
+arpa/inet.h
+-
+sys/socket.h
+-
+unistd.h
+-
+../constants.h
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
+
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.h
+signal.h
+-
+
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/Socket.h
+iostream
+-
 cstring
 -
 cstdio
@@ -17,12 +47,20 @@ netinet/in.h
 -
 unistd.h
 -
+fcntl.h
+-
 ../constants.h
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
 
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.h
+vector
+-
+sys/epoll.h
+-
 Socket.h
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/Socket.h
+../EPollUtility/EPollUtilities.h
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.h
 
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
 
@@ -31,4 +69,8 @@ iostream
 -
 SocketUtility/TCPSocket.h
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.h
+SignalHandler/SignalHandler.h
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.h
+MockClients/MockClients.h
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.h
 

@@ -123,6 +123,87 @@ DTLMiniProject/fast:
 	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/build
 .PHONY : DTLMiniProject/fast
 
+EPollUtility/EPollUtilities.o: EPollUtility/EPollUtilities.cpp.o
+
+.PHONY : EPollUtility/EPollUtilities.o
+
+# target to build an object file
+EPollUtility/EPollUtilities.cpp.o:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o
+.PHONY : EPollUtility/EPollUtilities.cpp.o
+
+EPollUtility/EPollUtilities.i: EPollUtility/EPollUtilities.cpp.i
+
+.PHONY : EPollUtility/EPollUtilities.i
+
+# target to preprocess a source file
+EPollUtility/EPollUtilities.cpp.i:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.i
+.PHONY : EPollUtility/EPollUtilities.cpp.i
+
+EPollUtility/EPollUtilities.s: EPollUtility/EPollUtilities.cpp.s
+
+.PHONY : EPollUtility/EPollUtilities.s
+
+# target to generate assembly for a file
+EPollUtility/EPollUtilities.cpp.s:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.s
+.PHONY : EPollUtility/EPollUtilities.cpp.s
+
+MockClients/MockClients.o: MockClients/MockClients.cpp.o
+
+.PHONY : MockClients/MockClients.o
+
+# target to build an object file
+MockClients/MockClients.cpp.o:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o
+.PHONY : MockClients/MockClients.cpp.o
+
+MockClients/MockClients.i: MockClients/MockClients.cpp.i
+
+.PHONY : MockClients/MockClients.i
+
+# target to preprocess a source file
+MockClients/MockClients.cpp.i:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.i
+.PHONY : MockClients/MockClients.cpp.i
+
+MockClients/MockClients.s: MockClients/MockClients.cpp.s
+
+.PHONY : MockClients/MockClients.s
+
+# target to generate assembly for a file
+MockClients/MockClients.cpp.s:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.s
+.PHONY : MockClients/MockClients.cpp.s
+
+SignalHandler/SignalHandler.o: SignalHandler/SignalHandler.cpp.o
+
+.PHONY : SignalHandler/SignalHandler.o
+
+# target to build an object file
+SignalHandler/SignalHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o
+.PHONY : SignalHandler/SignalHandler.cpp.o
+
+SignalHandler/SignalHandler.i: SignalHandler/SignalHandler.cpp.i
+
+.PHONY : SignalHandler/SignalHandler.i
+
+# target to preprocess a source file
+SignalHandler/SignalHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.i
+.PHONY : SignalHandler/SignalHandler.cpp.i
+
+SignalHandler/SignalHandler.s: SignalHandler/SignalHandler.cpp.s
+
+.PHONY : SignalHandler/SignalHandler.s
+
+# target to generate assembly for a file
+SignalHandler/SignalHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.s
+.PHONY : SignalHandler/SignalHandler.cpp.s
+
 SocketUtility/Socket.o: SocketUtility/Socket.cpp.o
 
 .PHONY : SocketUtility/Socket.o
@@ -213,6 +294,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... DTLMiniProject"
 	@echo "... edit_cache"
+	@echo "... EPollUtility/EPollUtilities.o"
+	@echo "... EPollUtility/EPollUtilities.i"
+	@echo "... EPollUtility/EPollUtilities.s"
+	@echo "... MockClients/MockClients.o"
+	@echo "... MockClients/MockClients.i"
+	@echo "... MockClients/MockClients.s"
+	@echo "... SignalHandler/SignalHandler.o"
+	@echo "... SignalHandler/SignalHandler.i"
+	@echo "... SignalHandler/SignalHandler.s"
 	@echo "... SocketUtility/Socket.o"
 	@echo "... SocketUtility/Socket.i"
 	@echo "... SocketUtility/Socket.s"

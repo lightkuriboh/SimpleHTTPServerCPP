@@ -84,6 +84,24 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.cpp">
+			<Option target="DTLMiniProject"/>
+		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.h">
+			<Option target="DTLMiniProject"/>
+		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.cpp">
+			<Option target="DTLMiniProject"/>
+		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.h">
+			<Option target="DTLMiniProject"/>
+		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.cpp">
+			<Option target="DTLMiniProject"/>
+		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.h">
+			<Option target="DTLMiniProject"/>
+		</Unit>
 		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/Socket.cpp">
 			<Option target="DTLMiniProject"/>
 		</Unit>

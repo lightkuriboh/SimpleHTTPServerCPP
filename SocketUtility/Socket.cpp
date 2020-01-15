@@ -23,21 +23,28 @@ ReturnStatus SocketUtility::Socket::socketOptions() {
     return ReturnStatus::SUCCESS;
 }
 
-void SocketUtility::Socket::setUpAddress() {
+void SocketUtility::Socket::setUpAddress(int port) {
+    delete address;
     address = new sockaddr_in();
     addressLength = sizeof(&address);
 
     address->sin_family = communicationDomain;
     address->sin_addr.s_addr = INADDR_ANY;
-    address->sin_port = htons(SocketUtility::PORT);
+    address->sin_port = htons(port);
 }
 
 ReturnStatus SocketUtility::Socket::identifySocket() {
-    setUpAddress();
-
-    if (bind(socketMaster, (sockaddr*) address, sizeof(*address)) < 0) {
-        perror("Error on binding socket address");
-
+    bool boundSuccess = false;
+    for (int counter = 0; counter < 1000; ++counter) {
+        setUpAddress(SocketUtility::PORT + counter);
+        if (bind(socketMaster, (sockaddr*) address, sizeof(*address)) < 0) {
+            continue;
+        }
+        boundSuccess = true;
+        activePORT = PORT + counter;
+        break;
+    }
+    if (!boundSuccess) {
         return ReturnStatus::FAILURE;
     }
     return ReturnStatus::SUCCESS;
@@ -46,7 +53,9 @@ ReturnStatus SocketUtility::Socket::identifySocket() {
 void SocketUtility::Socket::start() {
 
     if (createSocket() == ReturnStatus::SUCCESS && socketOptions() == ReturnStatus::SUCCESS) {
+
         if (identifySocket() == ReturnStatus::SUCCESS) {
+            std::cout << "Started socket successfully on port " << activePORT << std::endl;
             startingSocket();
         }
         close(socketMaster);

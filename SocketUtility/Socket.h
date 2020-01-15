@@ -5,11 +5,13 @@
 #ifndef DTLMINIPROJECT_SOCKET_H
 #define DTLMINIPROJECT_SOCKET_H
 
+#include <iostream>
 #include <cstring>
 #include <cstdio>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include "../constants.h"
 
 namespace SocketUtility {
@@ -19,10 +21,11 @@ namespace SocketUtility {
         int communicationType = SOCK_STREAM;
         int socketProtocol = 0;
         int socketOption = 0;
+        int activePORT = SocketUtility::PORT;
 
         ReturnStatus createSocket();
         ReturnStatus socketOptions();
-        void setUpAddress();
+        void setUpAddress(int port);
         ReturnStatus identifySocket();
 
     protected:

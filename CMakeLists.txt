@@ -9,6 +9,11 @@ add_executable(DTLMiniProject
         SocketUtility/Socket.cpp
         SocketUtility/TCPSocket.h
         SocketUtility/TCPSocket.cpp
+        SignalHandler/SignalHandler.h
+        SignalHandler/SignalHandler.cpp
+        EPollUtility/EPollUtilities.h
+        EPollUtility/EPollUtilities.cpp
+        MockClients/MockClients.h
+        MockClients/MockClients.cpp
         constants.h
 )
-#add_executable(DTLMiniProject multiConnectionsSocket.cpp)

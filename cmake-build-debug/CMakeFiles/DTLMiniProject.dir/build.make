@@ -96,11 +96,53 @@ CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.cpp -o CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.s
 
+CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o: CMakeFiles/DTLMiniProject.dir/flags.make
+CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o: ../SignalHandler/SignalHandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o -c /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.cpp
+
+CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.cpp > CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.i
+
+CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.cpp -o CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.s
+
+CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o: CMakeFiles/DTLMiniProject.dir/flags.make
+CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o: ../EPollUtility/EPollUtilities.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o -c /home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.cpp
+
+CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.cpp > CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.i
+
+CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.cpp -o CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.s
+
+CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o: CMakeFiles/DTLMiniProject.dir/flags.make
+CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o: ../MockClients/MockClients.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o -c /home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.cpp
+
+CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.cpp > CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.i
+
+CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.cpp -o CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.s
+
 # Object files for target DTLMiniProject
 DTLMiniProject_OBJECTS = \
 "CMakeFiles/DTLMiniProject.dir/main.cpp.o" \
 "CMakeFiles/DTLMiniProject.dir/SocketUtility/Socket.cpp.o" \
-"CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o"
+"CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o" \
+"CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o" \
+"CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o" \
+"CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o"
 
 # External object files for target DTLMiniProject
 DTLMiniProject_EXTERNAL_OBJECTS =
@@ -108,9 +150,12 @@ DTLMiniProject_EXTERNAL_OBJECTS =
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/main.cpp.o
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/SocketUtility/Socket.cpp.o
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o
+DTLMiniProject: CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o
+DTLMiniProject: CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o
+DTLMiniProject: CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/build.make
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable DTLMiniProject"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable DTLMiniProject"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/DTLMiniProject.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
