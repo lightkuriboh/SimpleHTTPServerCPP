@@ -9,10 +9,12 @@
 #include <sys/epoll.h>
 #include "Socket.h"
 #include "../EPollUtility/EPollUtilities.h"
+#include "../Server/Server.h"
 
 namespace SocketUtility {
     class TCPSocket : public Socket {
     private:
+        Server::Server* server;
         std::vector<epoll_event> ePollEvents;
         ReturnStatus makeSocketListening() override;
         ReturnStatus listeningConnections() override;
@@ -23,6 +25,8 @@ namespace SocketUtility {
         void closeConnection(int context, int socketfd);
     public:
         TCPSocket();
+        ~TCPSocket();
+        void initServer(Server::Server* _server);
     };
 }
 

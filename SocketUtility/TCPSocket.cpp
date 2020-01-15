@@ -4,13 +4,14 @@
 #include "TCPSocket.h"
 
 SocketUtility::TCPSocket::TCPSocket() {
+    this->server = nullptr;
     initSocket(AF_INET, SOCK_STREAM);
-    ePollEvents.resize(SocketUtility::maximumConnections + 1);
+    this->ePollEvents.resize(SocketUtility::maximumConnections + 1);
 }
 
 ReturnStatus SocketUtility::TCPSocket::makeSocketListening() {
     // tells a socket that it should be capable of accepting incoming connections
-    if (listen(socketMaster, SocketUtility::maximumPendingConnections) < 0) {
+    if (listen(this->socketMaster, SocketUtility::maximumPendingConnections) < 0) {
         perror("Listening already");
         return ReturnStatus::FAILURE;
     }
@@ -19,46 +20,37 @@ ReturnStatus SocketUtility::TCPSocket::makeSocketListening() {
 
 ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
 
-    char const *hello = "Hello world!";
+    std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
 
     int ePollFDs = epoll_create(SocketUtility::maximumConnections + 1);
-    addNewConnection(ePollFDs, socketMaster);
+    addNewConnection(ePollFDs, this->socketMaster);
 
     while (true) {
-        int numberFDs = epoll_wait(ePollFDs, &*ePollEvents.begin(), SocketUtility::maximumConnections, 0);
+        int numberFDs = epoll_wait(ePollFDs, &*this->ePollEvents.begin(), SocketUtility::maximumConnections, 0);
         for (int i = 0; i < numberFDs; ++i) {
+            auto sockfd = this->ePollEvents[i].data.fd;
             // New connection
-            if (ePollEvents[i].data.fd == socketMaster) {
-                int newSocket = accept(socketMaster, (sockaddr *) address, (socklen_t *) &addressLength);
+            if (sockfd == this->socketMaster) {
+                int newSocket = accept(this->socketMaster, (sockaddr *) this->address, (socklen_t *) &this->addressLength);
                 if (newSocket < 0) {
                     perror("Accepting!");
                     return ReturnStatus::FAILURE;
                 }
-                addNewConnection(ePollFDs, newSocket);
+                SocketUtility::TCPSocket::addNewConnection(ePollFDs, newSocket);
             } else {
                 // Ready to read data
-                if (ePollEvents[i].events & EPOLLIN) {
-                    char buffer[SocketUtility::bufferSize] = {0};
-                    long readValue = read(ePollEvents[i].data.fd, buffer, sizeof(buffer));
-                    if (readValue < 0) {
-                        if (errno == EPIPE) {
-                            std::cout << "SIGPIPE on socket " << ePollEvents[i].data.fd << std::endl;
-                            closeConnection(ePollFDs, ePollEvents[i].data.fd);
-                        }
+                if (this->ePollEvents[i].events & EPOLLIN) {
+                    if (this->server->handleRequest(sockfd) == ReturnStatus::FAILURE) {
+                        SocketUtility::TCPSocket::closeConnection(ePollFDs, sockfd);
                     } else {
-                        readyForWriteConnection(ePollFDs, ePollEvents[i].data.fd);
+                        write(sockfd, &*hello.begin(), strlen(&*hello.begin()));
+                        SocketUtility::TCPSocket::readyForWriteConnection(ePollFDs, ePollEvents[i].data.fd);
                     }
                 } else {
                     // Data is ready to be sent
-                    if (ePollEvents[i].events & EPOLLOUT) {
-                        auto signal = write(ePollEvents[i].data.fd, hello, strlen(hello));
-                        if (signal < 0) {
-                            if (errno == EPIPE) {
-                                std::cout << "SIGPIPE on socket " << ePollEvents[i].data.fd << std::endl;
-                                closeConnection(ePollFDs, ePollEvents[i].data.fd);
-                            }
-                        } else {
-                            readyForReadConnection(ePollFDs, ePollEvents[i].data.fd);
+                    if (this->ePollEvents[i].events & EPOLLOUT) {
+                        if (this->server->writingResponse(sockfd, ePollFDs, SocketUtility::TCPSocket::readyForReadConnection) == ReturnStatus::FAILURE) {
+                            SocketUtility::TCPSocket::closeConnection(ePollFDs, sockfd);
                         }
                     }
                 }
@@ -88,4 +80,12 @@ void SocketUtility::TCPSocket::readyForWriteConnection(int context, int socketfd
 
 void SocketUtility::TCPSocket::addNewConnection(int context, int socketfd) {
     EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLIN, EPOLL_CTL_ADD);
+}
+
+void SocketUtility::TCPSocket::initServer(Server::Server *_server) {
+    this->server = _server;
+}
+
+SocketUtility::TCPSocket::~TCPSocket() {
+    delete this->server;
 }

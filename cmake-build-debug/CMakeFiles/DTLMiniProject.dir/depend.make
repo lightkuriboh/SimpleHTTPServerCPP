@@ -8,6 +8,14 @@ CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o: ../MockClients/Mock
 CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o: ../MockClients/MockClients.h
 CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o: ../constants.h
 
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../EPollUtility/EPollUtilities.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/MyServer.cpp
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/MyServer.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/Server.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../SocketUtility/Socket.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../SocketUtility/TCPSocket.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../constants.h
+
 CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o: ../SignalHandler/SignalHandler.cpp
 CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o: ../SignalHandler/SignalHandler.h
 
@@ -16,6 +24,7 @@ CMakeFiles/DTLMiniProject.dir/SocketUtility/Socket.cpp.o: ../SocketUtility/Socke
 CMakeFiles/DTLMiniProject.dir/SocketUtility/Socket.cpp.o: ../constants.h
 
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../EPollUtility/EPollUtilities.h
+CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../Server/Server.h
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../SocketUtility/Socket.h
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../SocketUtility/TCPSocket.cpp
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../SocketUtility/TCPSocket.h
@@ -23,6 +32,8 @@ CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../constants.h
 
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../EPollUtility/EPollUtilities.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../MockClients/MockClients.h
+CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../Server/MyServer.h
+CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../Server/Server.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../SignalHandler/SignalHandler.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../SocketUtility/Socket.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../SocketUtility/TCPSocket.h

@@ -15,5 +15,8 @@ add_executable(DTLMiniProject
         EPollUtility/EPollUtilities.cpp
         MockClients/MockClients.h
         MockClients/MockClients.cpp
+        Server/Server.h
+        Server/MyServer.h
+        Server/MyServer.cpp
         constants.h
 )

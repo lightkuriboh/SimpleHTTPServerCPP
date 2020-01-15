@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.cpp" "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o"
   "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.cpp" "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o"
+  "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.cpp" "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o"
   "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.cpp" "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o"
   "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/Socket.cpp" "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles/DTLMiniProject.dir/SocketUtility/Socket.cpp.o"
   "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.cpp" "/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o"

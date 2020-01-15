@@ -177,6 +177,33 @@ MockClients/MockClients.cpp.s:
 	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.s
 .PHONY : MockClients/MockClients.cpp.s
 
+Server/MyServer.o: Server/MyServer.cpp.o
+
+.PHONY : Server/MyServer.o
+
+# target to build an object file
+Server/MyServer.cpp.o:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o
+.PHONY : Server/MyServer.cpp.o
+
+Server/MyServer.i: Server/MyServer.cpp.i
+
+.PHONY : Server/MyServer.i
+
+# target to preprocess a source file
+Server/MyServer.cpp.i:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.i
+.PHONY : Server/MyServer.cpp.i
+
+Server/MyServer.s: Server/MyServer.cpp.s
+
+.PHONY : Server/MyServer.s
+
+# target to generate assembly for a file
+Server/MyServer.cpp.s:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.s
+.PHONY : Server/MyServer.cpp.s
+
 SignalHandler/SignalHandler.o: SignalHandler/SignalHandler.cpp.o
 
 .PHONY : SignalHandler/SignalHandler.o
@@ -300,6 +327,9 @@ help:
 	@echo "... MockClients/MockClients.o"
 	@echo "... MockClients/MockClients.i"
 	@echo "... MockClients/MockClients.s"
+	@echo "... Server/MyServer.o"
+	@echo "... Server/MyServer.i"
+	@echo "... Server/MyServer.s"
 	@echo "... SignalHandler/SignalHandler.o"
 	@echo "... SignalHandler/SignalHandler.i"
 	@echo "... SignalHandler/SignalHandler.s"

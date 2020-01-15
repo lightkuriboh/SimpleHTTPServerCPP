@@ -96,6 +96,15 @@
 		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.h">
 			<Option target="DTLMiniProject"/>
 		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.cpp">
+			<Option target="DTLMiniProject"/>
+		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.h">
+			<Option target="DTLMiniProject"/>
+		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.h">
+			<Option target="DTLMiniProject"/>
+		</Unit>
 		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.cpp">
 			<Option target="DTLMiniProject"/>
 		</Unit>
