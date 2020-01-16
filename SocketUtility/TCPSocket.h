@@ -20,7 +20,7 @@ namespace SocketUtility {
         long closeConnectionsDuration = 5000;
         long milestoneTime;
         std::map<int, long> socketTimeOut;
-        void scanTerminatedConnections(const long &timer, const int &ePollContext);
+        void scanTerminatedConnections(const int &ePollContext);
         bool cleanTerminatedConnections = false;
         long timer;
 

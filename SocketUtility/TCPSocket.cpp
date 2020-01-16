@@ -33,7 +33,7 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
         if (this->cleanTerminatedConnections) {
             this->timer = Utils::Timer::getTimeNow();
             if (timer - this->milestoneTime > this->closeConnectionsDuration) {
-                this->scanTerminatedConnections(timer, ePollFDs);
+                this->scanTerminatedConnections(ePollFDs);
             }
         }
 
@@ -72,7 +72,7 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
                 // Data is ready to be sent
                 if (this->ePollEvents[i].events & EPOLLOUT) {
                     if (this->server->getOnlyPureRequest()) {
-                        if (write(sockfd, &*hello.begin(), strlen(&*hello.begin())) <= 0) {
+                        if (write(sockfd, &*hello.begin(), strlen(&*hello.begin())) < 0) {
                             SocketUtility::TCPSocket::closeConnection(ePollFDs, sockfd);
                         } else {
                             readyForReadConnection(ePollFDs, sockfd);
@@ -123,8 +123,8 @@ SocketUtility::TCPSocket::~TCPSocket() {
     delete this->server;
 }
 
-void SocketUtility::TCPSocket::scanTerminatedConnections(const long &timer, const int &ePollContext) {
-    this->milestoneTime = timer;
+void SocketUtility::TCPSocket::scanTerminatedConnections(const int &ePollContext) {
+    this->milestoneTime = this->timer;
     for (auto &[sockfd, time]: this->socketTimeOut) {
         if (sockfd != socketMaster && timer - time > this->timeOut) {
             SocketUtility::TCPSocket::closeConnection(ePollContext, sockfd);
