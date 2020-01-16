@@ -32,7 +32,8 @@ void ServerNS::MyServer::handleRequest(const int &sockfd) {
             respondBack(sockfd, resp);
         } else
             if (method == "GET" && endPoint == "/favicon.ico") {
-                // return image
+                std::string resp = RequestHandler::getIndexPage();
+                respondBack(sockfd, resp);
             }
 
 //    std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 55\n\n<html><body style='color:red'>Hello world</body></html>";

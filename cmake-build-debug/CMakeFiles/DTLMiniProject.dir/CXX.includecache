@@ -10,6 +10,10 @@
 sys/epoll.h
 -
 
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.cpp
+MyServer.h
+/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.h
+
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.h
 Server.h
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.h
@@ -73,12 +77,6 @@ fcntl.h
 -
 ../constants.h
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
-
-/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.cpp
-TCPSocket.h
-/home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.h
-../Server/MyServer.h
-/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.h
 
 /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.h
 map
