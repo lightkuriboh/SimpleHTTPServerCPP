@@ -204,6 +204,33 @@ Server/MyServer.cpp.s:
 	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.s
 .PHONY : Server/MyServer.cpp.s
 
+Server/Server.o: Server/Server.cpp.o
+
+.PHONY : Server/Server.o
+
+# target to build an object file
+Server/Server.cpp.o:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o
+.PHONY : Server/Server.cpp.o
+
+Server/Server.i: Server/Server.cpp.i
+
+.PHONY : Server/Server.i
+
+# target to preprocess a source file
+Server/Server.cpp.i:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.i
+.PHONY : Server/Server.cpp.i
+
+Server/Server.s: Server/Server.cpp.s
+
+.PHONY : Server/Server.s
+
+# target to generate assembly for a file
+Server/Server.cpp.s:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.s
+.PHONY : Server/Server.cpp.s
+
 SignalHandler/SignalHandler.o: SignalHandler/SignalHandler.cpp.o
 
 .PHONY : SignalHandler/SignalHandler.o
@@ -312,6 +339,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+utils/Timer.o: utils/Timer.cpp.o
+
+.PHONY : utils/Timer.o
+
+# target to build an object file
+utils/Timer.cpp.o:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o
+.PHONY : utils/Timer.cpp.o
+
+utils/Timer.i: utils/Timer.cpp.i
+
+.PHONY : utils/Timer.i
+
+# target to preprocess a source file
+utils/Timer.cpp.i:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.i
+.PHONY : utils/Timer.cpp.i
+
+utils/Timer.s: utils/Timer.cpp.s
+
+.PHONY : utils/Timer.s
+
+# target to generate assembly for a file
+utils/Timer.cpp.s:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.s
+.PHONY : utils/Timer.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -330,6 +384,9 @@ help:
 	@echo "... Server/MyServer.o"
 	@echo "... Server/MyServer.i"
 	@echo "... Server/MyServer.s"
+	@echo "... Server/Server.o"
+	@echo "... Server/Server.i"
+	@echo "... Server/Server.s"
 	@echo "... SignalHandler/SignalHandler.o"
 	@echo "... SignalHandler/SignalHandler.i"
 	@echo "... SignalHandler/SignalHandler.s"
@@ -342,6 +399,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... utils/Timer.o"
+	@echo "... utils/Timer.i"
+	@echo "... utils/Timer.s"
 .PHONY : help
 
 

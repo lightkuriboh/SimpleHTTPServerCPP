@@ -135,9 +135,22 @@ CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.cpp -o CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.s
 
+CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o: CMakeFiles/DTLMiniProject.dir/flags.make
+CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o: ../Server/Server.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o -c /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.cpp
+
+CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.cpp > CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.i
+
+CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.cpp -o CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.s
+
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: CMakeFiles/DTLMiniProject.dir/flags.make
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/MyServer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o -c /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.cpp
 
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.i: cmake_force
@@ -148,6 +161,19 @@ CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.cpp -o CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.s
 
+CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o: CMakeFiles/DTLMiniProject.dir/flags.make
+CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o: ../utils/Timer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o -c /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.cpp
+
+CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.cpp > CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.i
+
+CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.cpp -o CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.s
+
 # Object files for target DTLMiniProject
 DTLMiniProject_OBJECTS = \
 "CMakeFiles/DTLMiniProject.dir/main.cpp.o" \
@@ -156,7 +182,9 @@ DTLMiniProject_OBJECTS = \
 "CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o" \
 "CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o" \
 "CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o" \
-"CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o"
+"CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o" \
+"CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o" \
+"CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o"
 
 # External object files for target DTLMiniProject
 DTLMiniProject_EXTERNAL_OBJECTS =
@@ -167,10 +195,12 @@ DTLMiniProject: CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/EPollUtility/EPollUtilities.cpp.o
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o
+DTLMiniProject: CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o
+DTLMiniProject: CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/build.make
 DTLMiniProject: CMakeFiles/DTLMiniProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable DTLMiniProject"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable DTLMiniProject"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/DTLMiniProject.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

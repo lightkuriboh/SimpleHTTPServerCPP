@@ -9,7 +9,10 @@ int main() {
 //    Client::MockClients::spawningClient(5);
     Signals::SignalHandler::setSignalHanders();
 
-    Server::MyServer myServer = Server::MyServer();
+//    Server::MyServer myServer = Server::MyServer(true, false);
+    Server::MyServer myServer = Server::MyServer(true, true);
+//    Server::MyServer myServer = Server::MyServer(false, false);
+//    Server::MyServer myServer = Server::MyServer();
     myServer.start();
 
     return 0;

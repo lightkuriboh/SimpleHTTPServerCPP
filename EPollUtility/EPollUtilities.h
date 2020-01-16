@@ -10,7 +10,7 @@
 namespace EPollUtility {
     class EPollUtilities {
     public:
-        static void registerToEPoll(int context, int socketfd, EPOLL_EVENTS ePollEvent, int actionType);
+        static void registerToEPoll(const int &context, const int &socketfd, unsigned int ePollEvent, int actionType);
     };
 }
 

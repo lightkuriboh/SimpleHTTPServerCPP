@@ -16,11 +16,11 @@ namespace Server {
         std::map<int, std::string> responses;
         SocketUtility::TCPSocket* tcpSocket = nullptr;
     public:
-        MyServer();
+        explicit MyServer(bool _onlyPureRequest = false, bool _cleanTerminatedConnections = true);
         ~MyServer() override;
         void start();
-        ReturnStatus handleRequest(int sockfd) override;
-        ReturnStatus writingResponse(int sockfd, int context, void (*callback)(int, int)) override;
+        ReturnStatus handleRequest(const int &sockfd) override;
+        ReturnStatus writingResponse(const int &sockfd, const int &context, void (*callback)(const int&, const int&)) override;
     };
 }
 

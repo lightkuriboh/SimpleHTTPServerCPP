@@ -4,20 +4,20 @@
 
 #include "MyServer.h"
 
-ReturnStatus Server::MyServer::handleRequest(int sockfd) {
+ReturnStatus Server::MyServer::handleRequest(const int &sockfd) {
     char buffer[SocketUtility::bufferSize] = {0};
     auto readValue = read(sockfd, buffer, sizeof(buffer));
 //    printf("%s", buffer);
-    if (readValue < 0) {
-        if (errno == EPIPE) {
-            return ReturnStatus::FAILURE;
-        }
+    if (readValue <= 0) {
+        return ReturnStatus::FAILURE;
     }
+    this->responses[sockfd] = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
     return ReturnStatus::SUCCESS;
 }
 
-ReturnStatus Server::MyServer::writingResponse(int sockfd, int context, void (*callback)(int, int)) {
-    std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
+ReturnStatus Server::MyServer::writingResponse(const int &sockfd, const int &context, void (*callback)(const int&, const int&)) {
+    std::string hello = this->responses[sockfd];
+//    std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
     auto signal = write(sockfd, &*hello.begin(), strlen(&*hello.begin()));
     if (signal <= 0) {
         return ReturnStatus::FAILURE;
@@ -26,9 +26,10 @@ ReturnStatus Server::MyServer::writingResponse(int sockfd, int context, void (*c
     return ReturnStatus::SUCCESS;
 }
 
-Server::MyServer::MyServer() {
-    this->tcpSocket = new SocketUtility::TCPSocket();
+Server::MyServer::MyServer(bool _onlyPureRequest, bool _cleanTerminatedConnections) {
+    this->tcpSocket = new SocketUtility::TCPSocket(_cleanTerminatedConnections);
     this->tcpSocket->initServer(this);
+    this->setOnlyPureRequest(_onlyPureRequest);
 }
 
 Server::MyServer::~MyServer() {

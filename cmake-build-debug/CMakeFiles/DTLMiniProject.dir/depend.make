@@ -15,6 +15,11 @@ CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/Server.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../SocketUtility/Socket.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../SocketUtility/TCPSocket.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../constants.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../utils/Timer.h
+
+CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o: ../Server/Server.cpp
+CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o: ../Server/Server.h
+CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o: ../constants.h
 
 CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o: ../SignalHandler/SignalHandler.cpp
 CMakeFiles/DTLMiniProject.dir/SignalHandler/SignalHandler.cpp.o: ../SignalHandler/SignalHandler.h
@@ -29,6 +34,7 @@ CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../SocketUtility/So
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../SocketUtility/TCPSocket.cpp
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../SocketUtility/TCPSocket.h
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../constants.h
+CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../utils/Timer.h
 
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../EPollUtility/EPollUtilities.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../MockClients/MockClients.h
@@ -39,4 +45,8 @@ CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../SocketUtility/Socket.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../SocketUtility/TCPSocket.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../constants.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../main.cpp
+CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../utils/Timer.h
+
+CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o: ../utils/Timer.cpp
+CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o: ../utils/Timer.h
 

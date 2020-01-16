@@ -102,6 +102,9 @@
 		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.h">
 			<Option target="DTLMiniProject"/>
 		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.cpp">
+			<Option target="DTLMiniProject"/>
+		</Unit>
 		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.h">
 			<Option target="DTLMiniProject"/>
 		</Unit>
@@ -127,6 +130,12 @@
 			<Option target="DTLMiniProject"/>
 		</Unit>
 		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/main.cpp">
+			<Option target="DTLMiniProject"/>
+		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.cpp">
+			<Option target="DTLMiniProject"/>
+		</Unit>
+		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.h">
 			<Option target="DTLMiniProject"/>
 		</Unit>
 		<Unit filename="/home/kuribohkute/workspace/programming/projects/DTLMiniProject/CMakeLists.txt">

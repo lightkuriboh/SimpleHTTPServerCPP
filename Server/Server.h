@@ -13,10 +13,14 @@
 
 namespace Server {
     class Server {
+    private:
+        bool onlyPureRequest = false;
     public:
         virtual ~Server() = default;
-        virtual ReturnStatus handleRequest(int sockfd) = 0;
-        virtual ReturnStatus writingResponse(int sockfd, int context, void (*callback)(int, int)) = 0;
+        virtual ReturnStatus handleRequest(const int &sockfd) = 0;
+        virtual ReturnStatus writingResponse(const int &sockfd, const int &context, void (*callback)(const int&, const int&)) = 0;
+        bool getOnlyPureRequest();
+        void setOnlyPureRequest(bool _onlyPureRequest);
     };
 };
 

@@ -3,7 +3,11 @@
 //
 #include "TCPSocket.h"
 
-SocketUtility::TCPSocket::TCPSocket() {
+SocketUtility::TCPSocket::TCPSocket(bool _cleanTerminatedConnections) {
+    this->cleanTerminatedConnections = _cleanTerminatedConnections;
+    if (this->cleanTerminatedConnections) {
+        this->milestoneTime = this->timer = Utils::Timer::getTimeNow();
+    }
     this->server = nullptr;
     initSocket(AF_INET, SOCK_STREAM);
     this->ePollEvents.resize(SocketUtility::maximumConnections + 1);
@@ -26,7 +30,15 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
     addNewConnection(ePollFDs, this->socketMaster);
 
     while (true) {
-        int numberFDs = epoll_wait(ePollFDs, &*this->ePollEvents.begin(), SocketUtility::maximumConnections, 0);
+        if (this->cleanTerminatedConnections) {
+            this->timer = Utils::Timer::getTimeNow();
+            if (timer - this->milestoneTime > this->closeConnectionsDuration) {
+                this->scanTerminatedConnections(timer, ePollFDs);
+            }
+        }
+
+        int numberFDs = epoll_wait(ePollFDs, &*this->ePollEvents.begin(), SocketUtility::maximumConnections, 100);
+
         for (int i = 0; i < numberFDs; ++i) {
             auto sockfd = this->ePollEvents[i].data.fd;
             // New connection
@@ -38,17 +50,35 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
                 }
                 SocketUtility::TCPSocket::addNewConnection(ePollFDs, newSocket);
             } else {
-                // Ready to read data
+//                 Ready to read data
                 if (this->ePollEvents[i].events & EPOLLIN) {
-                    if (this->server->handleRequest(sockfd) == ReturnStatus::FAILURE) {
-                        SocketUtility::TCPSocket::closeConnection(ePollFDs, sockfd);
-                    } else {
-                        write(sockfd, &*hello.begin(), strlen(&*hello.begin()));
+
+                    if (this->server->getOnlyPureRequest()) {
+
                         SocketUtility::TCPSocket::readyForWriteConnection(ePollFDs, ePollEvents[i].data.fd);
+
+                    } else {
+                        SocketUtility::TCPSocket::readyForWriteConnection(ePollFDs, ePollEvents[i].data.fd);
+                        if (this->server->handleRequest(sockfd) == ReturnStatus::FAILURE) {
+                            SocketUtility::TCPSocket::closeConnection(ePollFDs, sockfd);
+                        } else {
+                            if (this->cleanTerminatedConnections) {
+                                this->socketTimeOut[sockfd] = timer;
+                            }
+                            SocketUtility::TCPSocket::readyForWriteConnection(ePollFDs, ePollEvents[i].data.fd);
+                        }
                     }
-                } else {
-                    // Data is ready to be sent
-                    if (this->ePollEvents[i].events & EPOLLOUT) {
+                }
+                // Data is ready to be sent
+                if (this->ePollEvents[i].events & EPOLLOUT) {
+                    if (this->server->getOnlyPureRequest()) {
+                        if (write(sockfd, &*hello.begin(), strlen(&*hello.begin())) <= 0) {
+                            SocketUtility::TCPSocket::closeConnection(ePollFDs, sockfd);
+                        } else {
+                            readyForReadConnection(ePollFDs, sockfd);
+                        }
+
+                    } else {
                         if (this->server->writingResponse(sockfd, ePollFDs, SocketUtility::TCPSocket::readyForReadConnection) == ReturnStatus::FAILURE) {
                             SocketUtility::TCPSocket::closeConnection(ePollFDs, sockfd);
                         }
@@ -65,21 +95,24 @@ void SocketUtility::TCPSocket::startingSocket() {
     }
 }
 
-void SocketUtility::TCPSocket::closeConnection(int context, int socketfd) {
-    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLET, EPOLL_CTL_DEL);
+void SocketUtility::TCPSocket::closeConnection(const int &context, const int &socketfd) {
+    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLERR, EPOLL_CTL_DEL);
     close(socketfd);
 }
 
-void SocketUtility::TCPSocket::readyForReadConnection(int context, int socketfd) {
-    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLIN, EPOLL_CTL_MOD);
+void SocketUtility::TCPSocket::readyForReadConnection(const int &context, const int &socketfd) {
+    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLIN | EPOLLET, EPOLL_CTL_MOD);
 }
 
-void SocketUtility::TCPSocket::readyForWriteConnection(int context, int socketfd) {
-    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLOUT, EPOLL_CTL_MOD);
+void SocketUtility::TCPSocket::readyForWriteConnection(const int &context, const int &socketfd) {
+    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLOUT | EPOLLET, EPOLL_CTL_MOD);
 }
 
-void SocketUtility::TCPSocket::addNewConnection(int context, int socketfd) {
-    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLIN, EPOLL_CTL_ADD);
+void SocketUtility::TCPSocket::addNewConnection(const int &context, const int &socketfd) {
+    if (this->cleanTerminatedConnections) {
+        this->socketTimeOut[socketfd] = Utils::Timer::getTimeNow();
+    }
+    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLIN | EPOLLET, EPOLL_CTL_ADD);
 }
 
 void SocketUtility::TCPSocket::initServer(Server::Server *_server) {
@@ -88,4 +121,13 @@ void SocketUtility::TCPSocket::initServer(Server::Server *_server) {
 
 SocketUtility::TCPSocket::~TCPSocket() {
     delete this->server;
+}
+
+void SocketUtility::TCPSocket::scanTerminatedConnections(const long &timer, const int &ePollContext) {
+    this->milestoneTime = timer;
+    for (auto &[sockfd, time]: this->socketTimeOut) {
+        if (sockfd != socketMaster && timer - time > this->timeOut) {
+            SocketUtility::TCPSocket::closeConnection(ePollContext, sockfd);
+        }
+    }
 }

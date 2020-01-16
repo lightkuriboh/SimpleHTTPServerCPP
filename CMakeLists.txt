@@ -16,7 +16,10 @@ add_executable(DTLMiniProject
         MockClients/MockClients.h
         MockClients/MockClients.cpp
         Server/Server.h
+        Server/Server.cpp
         Server/MyServer.h
         Server/MyServer.cpp
+        utils/Timer.h
+        utils/Timer.cpp
         constants.h
 )
