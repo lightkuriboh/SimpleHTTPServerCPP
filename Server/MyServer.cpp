@@ -4,39 +4,55 @@
 
 #include "MyServer.h"
 
-ReturnStatus Server::MyServer::handleRequest(const int &sockfd) {
+void ServerNS::MyServer::handleRequest(const int &sockfd) {
     char buffer[SocketUtility::bufferSize] = {0};
+
     auto readValue = read(sockfd, buffer, sizeof(buffer));
-//    printf("%s", buffer);
+
     if (readValue <= 0) {
-        return ReturnStatus::FAILURE;
+        return;
     }
-    this->responses[sockfd] = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
-    return ReturnStatus::SUCCESS;
+
+    std::string reqInfo;
+    for (auto i = 0; i < readValue; ++i) {
+        if (buffer[i] == '\n') {
+            break;
+        }
+        reqInfo += buffer[i];
+    }
+
+    auto [method, endPoint] = ServerNS::REST_INFORMATION::parseInformation(reqInfo);
+//    std::cout << method + ' ' + endPoint << std::endl;
+    if (method == "GET" && endPoint == "/") {
+        std::string resp = RequestHandler::getIndexPage();
+        respondBack(sockfd, resp);
+    } else
+        if (method == "GET" && endPoint == "/about") {
+            std::string resp = RequestHandler::getAboutPage();
+            respondBack(sockfd, resp);
+        } else
+            if (method == "GET" && endPoint == "/favicon.ico") {
+                // return image
+            }
+
+//    std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 55\n\n<html><body style='color:red'>Hello world</body></html>";
+//    respondBack(sockfd, hello);
 }
 
-ReturnStatus Server::MyServer::writingResponse(const int &sockfd, const int &context, void (*callback)(const int&, const int&)) {
-    std::string hello = this->responses[sockfd];
-//    std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
-    auto signal = write(sockfd, &*hello.begin(), strlen(&*hello.begin()));
-    if (signal <= 0) {
-        return ReturnStatus::FAILURE;
-    }
-    (*callback)(context, sockfd);
-    return ReturnStatus::SUCCESS;
-}
-
-Server::MyServer::MyServer(bool _onlyPureRequest, bool _cleanTerminatedConnections) {
-    this->tcpSocket = new SocketUtility::TCPSocket(_cleanTerminatedConnections);
+ServerNS::MyServer::MyServer(bool _onlyPureRequest) {
+    this->tcpSocket = new SocketUtility::TCPSocket();
     this->tcpSocket->initServer(this);
     this->setOnlyPureRequest(_onlyPureRequest);
 }
 
-Server::MyServer::~MyServer() {
+ServerNS::MyServer::~MyServer() {
     delete this->tcpSocket;
 }
 
-void Server::MyServer::start() {
-    tcpSocket->start();
+void ServerNS::MyServer::start() {
+    this->tcpSocket->start();
 }
 
+void ServerNS::MyServer::respondBack(const int &sockfd, std::string &resp) {
+    auto signal = write(sockfd, &*resp.begin(), strlen(&*resp.begin()));
+}

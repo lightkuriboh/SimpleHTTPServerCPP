@@ -4,11 +4,11 @@
 
 #include "Server.h"
 
-bool Server::Server::getOnlyPureRequest() {
+bool ServerNS::Server::getOnlyPureRequest() {
     return this->onlyPureRequest;
 }
 
-void Server::Server::setOnlyPureRequest(bool _onlyPureRequest) {
+void ServerNS::Server::setOnlyPureRequest(bool _onlyPureRequest) {
     this->onlyPureRequest = _onlyPureRequest;
 }
 

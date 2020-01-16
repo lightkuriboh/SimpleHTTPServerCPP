@@ -204,6 +204,60 @@ Server/MyServer.cpp.s:
 	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.s
 .PHONY : Server/MyServer.cpp.s
 
+Server/Requests/RESTInformation.o: Server/Requests/RESTInformation.cpp.o
+
+.PHONY : Server/Requests/RESTInformation.o
+
+# target to build an object file
+Server/Requests/RESTInformation.cpp.o:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/Requests/RESTInformation.cpp.o
+.PHONY : Server/Requests/RESTInformation.cpp.o
+
+Server/Requests/RESTInformation.i: Server/Requests/RESTInformation.cpp.i
+
+.PHONY : Server/Requests/RESTInformation.i
+
+# target to preprocess a source file
+Server/Requests/RESTInformation.cpp.i:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/Requests/RESTInformation.cpp.i
+.PHONY : Server/Requests/RESTInformation.cpp.i
+
+Server/Requests/RESTInformation.s: Server/Requests/RESTInformation.cpp.s
+
+.PHONY : Server/Requests/RESTInformation.s
+
+# target to generate assembly for a file
+Server/Requests/RESTInformation.cpp.s:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/Requests/RESTInformation.cpp.s
+.PHONY : Server/Requests/RESTInformation.cpp.s
+
+Server/Requests/RequestHandlers.o: Server/Requests/RequestHandlers.cpp.o
+
+.PHONY : Server/Requests/RequestHandlers.o
+
+# target to build an object file
+Server/Requests/RequestHandlers.cpp.o:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/Requests/RequestHandlers.cpp.o
+.PHONY : Server/Requests/RequestHandlers.cpp.o
+
+Server/Requests/RequestHandlers.i: Server/Requests/RequestHandlers.cpp.i
+
+.PHONY : Server/Requests/RequestHandlers.i
+
+# target to preprocess a source file
+Server/Requests/RequestHandlers.cpp.i:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/Requests/RequestHandlers.cpp.i
+.PHONY : Server/Requests/RequestHandlers.cpp.i
+
+Server/Requests/RequestHandlers.s: Server/Requests/RequestHandlers.cpp.s
+
+.PHONY : Server/Requests/RequestHandlers.s
+
+# target to generate assembly for a file
+Server/Requests/RequestHandlers.cpp.s:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/Server/Requests/RequestHandlers.cpp.s
+.PHONY : Server/Requests/RequestHandlers.cpp.s
+
 Server/Server.o: Server/Server.cpp.o
 
 .PHONY : Server/Server.o
@@ -339,6 +393,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+utils/OtherUtils.o: utils/OtherUtils.cpp.o
+
+.PHONY : utils/OtherUtils.o
+
+# target to build an object file
+utils/OtherUtils.cpp.o:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/utils/OtherUtils.cpp.o
+.PHONY : utils/OtherUtils.cpp.o
+
+utils/OtherUtils.i: utils/OtherUtils.cpp.i
+
+.PHONY : utils/OtherUtils.i
+
+# target to preprocess a source file
+utils/OtherUtils.cpp.i:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/utils/OtherUtils.cpp.i
+.PHONY : utils/OtherUtils.cpp.i
+
+utils/OtherUtils.s: utils/OtherUtils.cpp.s
+
+.PHONY : utils/OtherUtils.s
+
+# target to generate assembly for a file
+utils/OtherUtils.cpp.s:
+	$(MAKE) -f CMakeFiles/DTLMiniProject.dir/build.make CMakeFiles/DTLMiniProject.dir/utils/OtherUtils.cpp.s
+.PHONY : utils/OtherUtils.cpp.s
+
 utils/Timer.o: utils/Timer.cpp.o
 
 .PHONY : utils/Timer.o
@@ -384,6 +465,12 @@ help:
 	@echo "... Server/MyServer.o"
 	@echo "... Server/MyServer.i"
 	@echo "... Server/MyServer.s"
+	@echo "... Server/Requests/RESTInformation.o"
+	@echo "... Server/Requests/RESTInformation.i"
+	@echo "... Server/Requests/RESTInformation.s"
+	@echo "... Server/Requests/RequestHandlers.o"
+	@echo "... Server/Requests/RequestHandlers.i"
+	@echo "... Server/Requests/RequestHandlers.s"
 	@echo "... Server/Server.o"
 	@echo "... Server/Server.i"
 	@echo "... Server/Server.s"
@@ -399,6 +486,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... utils/OtherUtils.o"
+	@echo "... utils/OtherUtils.i"
+	@echo "... utils/OtherUtils.s"
 	@echo "... utils/Timer.o"
 	@echo "... utils/Timer.i"
 	@echo "... utils/Timer.s"

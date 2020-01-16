@@ -11,14 +11,13 @@
 #include <sys/socket.h>
 #include "../constants.h"
 
-namespace Server {
+namespace ServerNS {
     class Server {
     private:
         bool onlyPureRequest = false;
     public:
         virtual ~Server() = default;
-        virtual ReturnStatus handleRequest(const int &sockfd) = 0;
-        virtual ReturnStatus writingResponse(const int &sockfd, const int &context, void (*callback)(const int&, const int&)) = 0;
+        virtual void handleRequest(const int &sockfd) = 0;
         bool getOnlyPureRequest();
         void setOnlyPureRequest(bool _onlyPureRequest);
     };

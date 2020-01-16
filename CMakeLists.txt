@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.15)
 project(DTLMiniProject)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS -pthread)
+
+#add_executable(DTLMiniProject Try.cpp)
 
 add_executable(DTLMiniProject
         main.cpp
@@ -19,7 +22,14 @@ add_executable(DTLMiniProject
         Server/Server.cpp
         Server/MyServer.h
         Server/MyServer.cpp
+        Server/Requests/RESTInformation.h
+        Server/Requests/RESTInformation.cpp
+        Server/Requests/RequestHandlers.h
+        Server/Requests/RequestHandlers.cpp
         utils/Timer.h
         utils/Timer.cpp
+        utils/ThreadPool.h
+        utils/OtherUtils.h
+        utils/OtherUtils.cpp
         constants.h
 )

@@ -12,31 +12,23 @@
 #include "../EPollUtility/EPollUtilities.h"
 #include "../Server/Server.h"
 #include "../utils/Timer.h"
+#include "../utils/ThreadPool.h"
 
 namespace SocketUtility {
     class TCPSocket : public Socket {
     private:
-        long timeOut = 2000;
-        long closeConnectionsDuration = 5000;
-        long milestoneTime;
-        std::map<int, long> socketTimeOut;
-        void scanTerminatedConnections(const int &ePollContext);
-        bool cleanTerminatedConnections = false;
-        long timer;
-
-        Server::Server* server;
+        ThreadPool *threadPool = nullptr;
+        ServerNS::Server* server;
         std::vector<epoll_event> ePollEvents;
         ReturnStatus makeSocketListening() override;
         ReturnStatus listeningConnections() override;
         void startingSocket() override;
-        static void readyForReadConnection(const int &context, const int &socketfd);
-        static void readyForWriteConnection(const int &context, const int &socketfd);
-        void addNewConnection(const int &context, const int &socketfd);
+        static void addNewConnection(const int &context, const int &socketfd);
         static void closeConnection(const int &context, const int &socketfd);
     public:
-        explicit TCPSocket(bool _cleanTerminatedConnections = true);
+        TCPSocket();
         ~TCPSocket();
-        void initServer(Server::Server* _server);
+        void initServer(ServerNS::Server* _server);
     };
 }
 

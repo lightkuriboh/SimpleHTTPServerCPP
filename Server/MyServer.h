@@ -8,19 +8,21 @@
 #include "Server.h"
 #include "../SocketUtility/TCPSocket.h"
 #include <cstring>
+#include "Requests/RESTInformation.h"
+#include "Requests/RESTHandler.h"
+#include "Requests/RequestHandlers.h"
 #include <map>
 
-namespace Server {
+namespace ServerNS {
     class MyServer : public Server {
     private:
-        std::map<int, std::string> responses;
         SocketUtility::TCPSocket* tcpSocket = nullptr;
     public:
-        explicit MyServer(bool _onlyPureRequest = false, bool _cleanTerminatedConnections = true);
+        explicit MyServer(bool _onlyPureRequest = false);
         ~MyServer() override;
         void start();
-        ReturnStatus handleRequest(const int &sockfd) override;
-        ReturnStatus writingResponse(const int &sockfd, const int &context, void (*callback)(const int&, const int&)) override;
+        void handleRequest(const int &sockfd) override;
+        static void respondBack(const int &sockfd, std::string &resp);
     };
 }
 

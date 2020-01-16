@@ -11,11 +11,25 @@ CMakeFiles/DTLMiniProject.dir/MockClients/MockClients.cpp.o: ../constants.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../EPollUtility/EPollUtilities.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/MyServer.cpp
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/MyServer.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/Requests/RESTHandler.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/Requests/RESTInformation.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/Requests/RequestHandlers.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../Server/Server.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../SocketUtility/Socket.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../SocketUtility/TCPSocket.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../constants.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../utils/OtherUtils.h
+CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../utils/ThreadPool.h
 CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o: ../utils/Timer.h
+
+CMakeFiles/DTLMiniProject.dir/Server/Requests/RESTInformation.cpp.o: ../Server/Requests/RESTInformation.cpp
+CMakeFiles/DTLMiniProject.dir/Server/Requests/RESTInformation.cpp.o: ../Server/Requests/RESTInformation.h
+
+CMakeFiles/DTLMiniProject.dir/Server/Requests/RequestHandlers.cpp.o: ../Server/Requests/RESTHandler.h
+CMakeFiles/DTLMiniProject.dir/Server/Requests/RequestHandlers.cpp.o: ../Server/Requests/RESTInformation.h
+CMakeFiles/DTLMiniProject.dir/Server/Requests/RequestHandlers.cpp.o: ../Server/Requests/RequestHandlers.cpp
+CMakeFiles/DTLMiniProject.dir/Server/Requests/RequestHandlers.cpp.o: ../Server/Requests/RequestHandlers.h
+CMakeFiles/DTLMiniProject.dir/Server/Requests/RequestHandlers.cpp.o: ../utils/OtherUtils.h
 
 CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o: ../Server/Server.cpp
 CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o: ../Server/Server.h
@@ -29,23 +43,37 @@ CMakeFiles/DTLMiniProject.dir/SocketUtility/Socket.cpp.o: ../SocketUtility/Socke
 CMakeFiles/DTLMiniProject.dir/SocketUtility/Socket.cpp.o: ../constants.h
 
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../EPollUtility/EPollUtilities.h
+CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../Server/MyServer.h
+CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../Server/Requests/RESTHandler.h
+CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../Server/Requests/RESTInformation.h
+CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../Server/Requests/RequestHandlers.h
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../Server/Server.h
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../SocketUtility/Socket.h
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../SocketUtility/TCPSocket.cpp
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../SocketUtility/TCPSocket.h
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../constants.h
+CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../utils/OtherUtils.h
+CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../utils/ThreadPool.h
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o: ../utils/Timer.h
 
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../EPollUtility/EPollUtilities.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../MockClients/MockClients.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../Server/MyServer.h
+CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../Server/Requests/RESTHandler.h
+CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../Server/Requests/RESTInformation.h
+CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../Server/Requests/RequestHandlers.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../Server/Server.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../SignalHandler/SignalHandler.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../SocketUtility/Socket.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../SocketUtility/TCPSocket.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../constants.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../main.cpp
+CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../utils/OtherUtils.h
+CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../utils/ThreadPool.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o: ../utils/Timer.h
+
+CMakeFiles/DTLMiniProject.dir/utils/OtherUtils.cpp.o: ../utils/OtherUtils.cpp
+CMakeFiles/DTLMiniProject.dir/utils/OtherUtils.cpp.o: ../utils/OtherUtils.h
 
 CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o: ../utils/Timer.cpp
 CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o: ../utils/Timer.h

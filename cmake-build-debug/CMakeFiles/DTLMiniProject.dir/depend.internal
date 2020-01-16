@@ -12,11 +12,25 @@ CMakeFiles/DTLMiniProject.dir/Server/MyServer.cpp.o
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.cpp
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTHandler.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTInformation.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RequestHandlers.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/Socket.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/OtherUtils.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/ThreadPool.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.h
+CMakeFiles/DTLMiniProject.dir/Server/Requests/RESTInformation.cpp.o
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTInformation.cpp
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTInformation.h
+CMakeFiles/DTLMiniProject.dir/Server/Requests/RequestHandlers.cpp.o
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTHandler.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTInformation.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RequestHandlers.cpp
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RequestHandlers.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/OtherUtils.h
 CMakeFiles/DTLMiniProject.dir/Server/Server.cpp.o
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.cpp
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.h
@@ -30,23 +44,37 @@ CMakeFiles/DTLMiniProject.dir/SocketUtility/Socket.cpp.o
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
 CMakeFiles/DTLMiniProject.dir/SocketUtility/TCPSocket.cpp.o
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTHandler.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTInformation.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RequestHandlers.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/Socket.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.cpp
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/OtherUtils.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/ThreadPool.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.h
 CMakeFiles/DTLMiniProject.dir/main.cpp.o
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/EPollUtility/EPollUtilities.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/MockClients/MockClients.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/MyServer.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTHandler.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RESTInformation.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Requests/RequestHandlers.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/Server/Server.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SignalHandler/SignalHandler.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/Socket.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/SocketUtility/TCPSocket.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/constants.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/main.cpp
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/OtherUtils.h
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/ThreadPool.h
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.h
+CMakeFiles/DTLMiniProject.dir/utils/OtherUtils.cpp.o
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/OtherUtils.cpp
+ /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/OtherUtils.h
 CMakeFiles/DTLMiniProject.dir/utils/Timer.cpp.o
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.cpp
  /home/kuribohkute/workspace/programming/projects/DTLMiniProject/utils/Timer.h
