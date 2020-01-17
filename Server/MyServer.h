@@ -12,11 +12,16 @@
 #include "Requests/RESTHandler.h"
 #include "Requests/RequestHandlers.h"
 #include <map>
+#include <fstream>
 
 namespace ServerNS {
     class MyServer : public Server {
     private:
+        const std::string resourcesFolder = "../resources/html/";
         SocketUtility::TCPSocket* tcpSocket = nullptr;
+        void getStaticHTMLs();
+        std::map<std::string, std::string> *staticHTMLs;
+        void getStaticHTML(std::string name, std::string htmlFile);
     public:
         explicit MyServer(bool _onlyPureRequest = false);
         ~MyServer() override;

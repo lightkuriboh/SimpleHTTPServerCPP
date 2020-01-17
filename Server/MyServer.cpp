@@ -22,32 +22,37 @@ void ServerNS::MyServer::handleRequest(const int &sockfd) {
     }
 
     auto [method, endPoint] = ServerNS::REST_INFORMATION::parseInformation(reqInfo);
-//    std::cout << method + ' ' + endPoint << std::endl;
+
+    std::string content;
+    std::string resp;
+
     if (method == "GET" && endPoint == "/") {
-        std::string resp = RequestHandler::getIndexPage();
-        respondBack(sockfd, resp);
+        content = (*this->staticHTMLs)["index"];
+        resp = RequestHandler::resp(content);
     } else
         if (method == "GET" && endPoint == "/about") {
-            std::string resp = RequestHandler::getAboutPage();
-            respondBack(sockfd, resp);
+            content = (*this->staticHTMLs)["about"];
+            resp = RequestHandler::resp(content);
         } else
             if (method == "GET" && endPoint == "/favicon.ico") {
-                std::string resp = RequestHandler::getIndexPage();
-                respondBack(sockfd, resp);
+                content = (*this->staticHTMLs)["index"];
+                resp = RequestHandler::resp(content);
             }
 
-//    std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 55\n\n<html><body style='color:red'>Hello world</body></html>";
-//    respondBack(sockfd, hello);
+    respondBack(sockfd, resp);
 }
 
 ServerNS::MyServer::MyServer(bool _onlyPureRequest) {
     this->tcpSocket = new SocketUtility::TCPSocket();
     this->tcpSocket->initServer(this);
     this->setOnlyPureRequest(_onlyPureRequest);
+    this->staticHTMLs = new std::map<std::string, std::string>();
+    this->getStaticHTMLs();
 }
 
 ServerNS::MyServer::~MyServer() {
-    delete tcpSocket;
+    delete this->tcpSocket;
+    delete this->staticHTMLs;
 }
 
 void ServerNS::MyServer::start() {
@@ -56,4 +61,20 @@ void ServerNS::MyServer::start() {
 
 void ServerNS::MyServer::respondBack(const int &sockfd, std::string &resp) {
     auto signal = write(sockfd, &*resp.begin(), strlen(&*resp.begin()));
+}
+
+void ServerNS::MyServer::getStaticHTMLs() {
+    this->getStaticHTML("index", "index.html");
+    this->getStaticHTML("about", "about.html");
+}
+
+void ServerNS::MyServer::getStaticHTML(std::string name, std::string htmlFile) {
+    (*this->staticHTMLs)[name] = "";
+    std::ifstream fi;
+    fi.open(this->resourcesFolder + htmlFile);
+    std::string line;
+    while (getline(fi, line)) {
+        (*this->staticHTMLs)[name] += line;
+    }
+    fi.close();
 }

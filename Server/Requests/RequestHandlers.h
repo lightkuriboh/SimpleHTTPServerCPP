@@ -11,9 +11,8 @@
 
 namespace ServerNS {
     class RequestHandler {
-    private:
-        static std::string resp(const std::string &html);
     public:
+        static std::string resp(const std::string &html);
         static std::string getIndexPage();
         static std::string getAboutPage();
     };
