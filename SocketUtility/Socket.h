@@ -29,8 +29,10 @@ namespace SocketUtility {
         ReturnStatus identifySocket();
 
     protected:
-        sockaddr_in* address = nullptr;
-        int addressLength = 0;
+        sockaddr_in address{};
+        sockaddr clientAddress{};
+        socklen_t addressLength = 0;
+        socklen_t clientAddressLength = 0;
 
         int socketMaster = 0;
 
@@ -40,6 +42,7 @@ namespace SocketUtility {
         void initSocket(int _communicationDomain, int _communicationType);
     public:
         void start();
+        Socket();
 
     };
 }

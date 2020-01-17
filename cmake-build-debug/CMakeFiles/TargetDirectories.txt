@@ -1,3 +1,0 @@
-/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles/DTLMiniProject.dir
-/home/kuribohkute/workspace/programming/projects/DTLMiniProject/cmake-build-debug/CMakeFiles/edit_cache.dir

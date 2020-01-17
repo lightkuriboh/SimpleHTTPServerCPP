@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.10)
 project(DTLMiniProject)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -16,8 +16,6 @@ add_executable(DTLMiniProject
         SignalHandler/SignalHandler.cpp
         EPollUtility/EPollUtilities.h
         EPollUtility/EPollUtilities.cpp
-        MockClients/MockClients.h
-        MockClients/MockClients.cpp
         Server/Server.h
         Server/Server.cpp
         Server/MyServer.h
@@ -26,9 +24,6 @@ add_executable(DTLMiniProject
         Server/Requests/RESTInformation.cpp
         Server/Requests/RequestHandlers.h
         Server/Requests/RequestHandlers.cpp
-        utils/Timer.h
-        utils/Timer.cpp
-        utils/ThreadPool.h
         utils/OtherUtils.h
         utils/OtherUtils.cpp
         constants.h

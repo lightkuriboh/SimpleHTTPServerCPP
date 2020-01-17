@@ -47,7 +47,7 @@ ServerNS::MyServer::MyServer(bool _onlyPureRequest) {
 }
 
 ServerNS::MyServer::~MyServer() {
-    delete this->tcpSocket;
+    delete tcpSocket;
 }
 
 void ServerNS::MyServer::start() {

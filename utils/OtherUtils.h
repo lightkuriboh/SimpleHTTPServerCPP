@@ -7,11 +7,13 @@
 
 #include <iostream>
 #include <sstream>
+#include <chrono>
 
 namespace Utils {
     class OtherUtils {
     public:
         static std::string intToString(int x);
+        static long getTimeNow();
     };
 }
 

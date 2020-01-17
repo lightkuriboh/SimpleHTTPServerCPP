@@ -11,13 +11,10 @@
 #include "Socket.h"
 #include "../EPollUtility/EPollUtilities.h"
 #include "../Server/Server.h"
-#include "../utils/Timer.h"
-#include "../utils/ThreadPool.h"
 
 namespace SocketUtility {
     class TCPSocket : public Socket {
     private:
-        ThreadPool *threadPool = nullptr;
         ServerNS::Server* server;
         std::vector<epoll_event> ePollEvents;
         ReturnStatus makeSocketListening() override;
@@ -27,7 +24,6 @@ namespace SocketUtility {
         static void closeConnection(const int &context, const int &socketfd);
     public:
         TCPSocket();
-        ~TCPSocket();
         void initServer(ServerNS::Server* _server);
     };
 }

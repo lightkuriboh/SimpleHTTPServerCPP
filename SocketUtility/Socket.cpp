@@ -16,7 +16,7 @@ ReturnStatus SocketUtility::Socket::createSocket() {
 }
 
 ReturnStatus SocketUtility::Socket::socketOptions() {
-    if (setsockopt(this->socketMaster, SOL_SOCKET, SO_REUSEPORT, &this->socketOption, sizeof(this->socketOption))) {
+    if (setsockopt(this->socketMaster, SOL_SOCKET, SO_REUSEPORT, &this->socketOption, sizeof(int))) {
         perror("setsockopt");
         return ReturnStatus::FAILURE;
     }
@@ -24,20 +24,18 @@ ReturnStatus SocketUtility::Socket::socketOptions() {
 }
 
 void SocketUtility::Socket::setUpAddress(int port) {
-    delete this->address;
-    this->address = new sockaddr_in();
-    this->addressLength = sizeof(&address);
+    this->addressLength = sizeof(address);
 
-    this->address->sin_family = communicationDomain;
-    this->address->sin_addr.s_addr = INADDR_ANY;
-    this->address->sin_port = htons(port);
+    this->address.sin_family = communicationDomain;
+    this->address.sin_addr.s_addr = INADDR_ANY;
+    this->address.sin_port = htons(port);
 }
 
 ReturnStatus SocketUtility::Socket::identifySocket() {
     bool boundSuccess = false;
     for (int counter = 0; counter < 1000; ++counter) {
         this->setUpAddress(SocketUtility::PORT + counter);
-        if (bind(this->socketMaster, (sockaddr*) this->address, sizeof(*this->address)) < 0) {
+        if (bind(this->socketMaster, (struct sockaddr*) &this->address, sizeof(struct sockaddr)) < 0) {
             continue;
         }
         boundSuccess = true;
@@ -65,5 +63,13 @@ void SocketUtility::Socket::start() {
 void SocketUtility::Socket::initSocket(int _communicationDomain, int _communicationType) {
     this->communicationDomain = _communicationDomain;
     this->communicationType = _communicationType;
+}
+
+SocketUtility::Socket::Socket() {
+    this->clientAddress = sockaddr{};
+    this->clientAddressLength = sizeof(this->clientAddress);
+    this->address = sockaddr_in{};
+    this->addressLength = sizeof(this->address);
+
 }
 

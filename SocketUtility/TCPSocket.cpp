@@ -4,8 +4,7 @@
 #include "TCPSocket.h"
 #include "../Server/MyServer.h"
 
-SocketUtility::TCPSocket::TCPSocket() {
-    this->threadPool = new ThreadPool(std::thread::hardware_concurrency());
+SocketUtility::TCPSocket::TCPSocket(): Socket() {
     this->server = nullptr;
     initSocket(AF_INET, SOCK_STREAM);
     this->ePollEvents.resize(SocketUtility::maximumConnections + 1);
@@ -25,11 +24,11 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
     std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 55\n\n<html><body style='color:red'>Hello world</body></html>";
 
     int ePollFDs = epoll_create(SocketUtility::maximumConnections + 1);
+//    int ePollFDs = epoll_create1(0);
     addNewConnection(ePollFDs, this->socketMaster);
-
     while (true) {
 
-        int numberFDs = epoll_wait(ePollFDs, &*this->ePollEvents.begin(), SocketUtility::maximumConnections, 100);
+        int numberFDs = epoll_wait(ePollFDs, &*this->ePollEvents.begin(), SocketUtility::maximumConnections, 0);
         for (int i = 0; i < numberFDs; ++i) {
             auto sockfd = this->ePollEvents[i].data.fd;
             if (this->ePollEvents[i].events & EPOLLERR || this->ePollEvents[i].events & EPOLLHUP) {
@@ -38,7 +37,7 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
             } else
             // New connection
             if (sockfd == this->socketMaster) {
-                int newSocket = accept(this->socketMaster, (sockaddr *) this->address, (socklen_t *) &this->addressLength);
+                int newSocket = accept(this->socketMaster, &this->clientAddress, &this->clientAddressLength);
                 if (newSocket < 0) {
                     perror("Accepting!");
                     return ReturnStatus::FAILURE;
@@ -53,7 +52,6 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
                     if (this->server->getOnlyPureRequest()) {
                         auto signal = write(sockfd, &*hello.begin(), strlen(&*hello.begin()));
                     } else {
-//                        this->threadPool->enqueue([&]() { this->server->handleRequest(sockfd); });
                          this->server->handleRequest(sockfd);
                     }
                 }
@@ -69,18 +67,14 @@ void SocketUtility::TCPSocket::startingSocket() {
 }
 
 void SocketUtility::TCPSocket::closeConnection(const int &context, const int &socketfd) {
-    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLIN, EPOLL_CTL_DEL);
+    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLERR, EPOLL_CTL_DEL);
     close(socketfd);
 }
 
 void SocketUtility::TCPSocket::addNewConnection(const int &context, const int &socketfd) {
-    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLIN | EPOLLET, EPOLL_CTL_ADD);
+    EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLIN, EPOLL_CTL_ADD);
 }
 
 void SocketUtility::TCPSocket::initServer(ServerNS::Server *_server) {
     this->server = _server;
-}
-
-SocketUtility::TCPSocket::~TCPSocket() {
-    delete this->server;
 }

@@ -14,7 +14,7 @@ namespace SocketUtility {
     constexpr int maximumPendingConnections = 10000;
     constexpr int maximumConnections = 20000;
     constexpr int bufferSize = 4096;
-    constexpr int PORT = 8080;
+    constexpr int PORT = 2101;
 }
 
 #endif //DTLMINIPROJECT_CONSTANTS_H
