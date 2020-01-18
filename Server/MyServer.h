@@ -9,7 +9,6 @@
 #include "../SocketUtility/TCPSocket.h"
 #include <cstring>
 #include "Requests/RESTInformation.h"
-#include "Requests/RESTHandler.h"
 #include "Requests/RequestHandlers.h"
 #include <map>
 #include <fstream>
@@ -17,17 +16,20 @@
 namespace ServerNS {
     class MyServer : public Server {
     private:
-        const std::string resourcesFolder = "../resources/html/";
+        const std::string GET = "GET";
+
+        const std::string resourcesFolder = "../resources/";
         SocketUtility::TCPSocket* tcpSocket = nullptr;
         void getStaticHTMLs();
         std::map<std::string, std::string> *staticHTMLs;
-        void getStaticHTML(std::string name, std::string htmlFile);
+        void getStaticHTML(const std::string &name, const std::string &htmlFile);
+        void transferFile(const int &sockfd, const std::string &endPoint);
+        static void respondBack(const int &sockfd, const std::string &resp);
     public:
         explicit MyServer(bool _onlyPureRequest = false);
         ~MyServer() override;
         void start();
         void handleRequest(const int &sockfd) override;
-        static void respondBack(const int &sockfd, std::string &resp);
     };
 }
 

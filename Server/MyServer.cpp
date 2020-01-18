@@ -23,23 +23,29 @@ void ServerNS::MyServer::handleRequest(const int &sockfd) {
 
     auto [method, endPoint] = ServerNS::REST_INFORMATION::parseInformation(reqInfo);
 
-    std::string content;
-    std::string resp;
+    if (method == this->GET && endPoint == "/") {
+        respondBack(sockfd, ServerNS::RequestHandler::getIndexPage());
+        return;
+    }
 
-    if (method == "GET" && endPoint == "/") {
-        content = (*this->staticHTMLs)["index"];
+    std::string content = (*this->staticHTMLs)["index"];
+    std::string resp = RequestHandler::resp(content);
+
+    auto isGetStaticHTML = false;
+
+    if (method == this->GET && endPoint == "/about") {
+        content = (*this->staticHTMLs)["about"];
         resp = RequestHandler::resp(content);
-    } else
-        if (method == "GET" && endPoint == "/about") {
-            content = (*this->staticHTMLs)["about"];
-            resp = RequestHandler::resp(content);
-        } else
-            if (method == "GET" && endPoint == "/favicon.ico") {
-                content = (*this->staticHTMLs)["index"];
-                resp = RequestHandler::resp(content);
-            }
-
-    respondBack(sockfd, resp);
+        isGetStaticHTML = true;
+    }
+    if (isGetStaticHTML) {
+        ServerNS::MyServer::respondBack(sockfd, resp);
+    } else {
+        if (method == this->GET) {
+            endPoint = Utils::OtherUtils::normalizeString(endPoint);
+            ServerNS::MyServer::transferFile(sockfd, endPoint);
+        }
+    }
 }
 
 ServerNS::MyServer::MyServer(bool _onlyPureRequest) {
@@ -59,7 +65,7 @@ void ServerNS::MyServer::start() {
     this->tcpSocket->start();
 }
 
-void ServerNS::MyServer::respondBack(const int &sockfd, std::string &resp) {
+void ServerNS::MyServer::respondBack(const int &sockfd, const std::string &resp) {
     auto signal = write(sockfd, &*resp.begin(), strlen(&*resp.begin()));
 }
 
@@ -68,7 +74,7 @@ void ServerNS::MyServer::getStaticHTMLs() {
     this->getStaticHTML("about", "about.html");
 }
 
-void ServerNS::MyServer::getStaticHTML(std::string name, std::string htmlFile) {
+void ServerNS::MyServer::getStaticHTML(const std::string &name, const std::string &htmlFile) {
     (*this->staticHTMLs)[name] = "";
     std::ifstream fi;
     fi.open(this->resourcesFolder + htmlFile);
@@ -77,4 +83,43 @@ void ServerNS::MyServer::getStaticHTML(std::string name, std::string htmlFile) {
         (*this->staticHTMLs)[name] += line;
     }
     fi.close();
+}
+
+void ServerNS::MyServer::transferFile(const int &sockfd, const std::string &endPoint) {
+    std::string fileName;
+    auto n = endPoint.size();
+    for (auto i = 1; i < n; i++) {
+        fileName += endPoint[i];
+    }
+    auto fileType = Utils::OtherUtils::getFileType(fileName);
+    auto filePath = this->resourcesFolder + fileName;
+    auto fileLength = Utils::OtherUtils::getFileSize(filePath);
+    if (fileLength < 0) {
+        // file does not exist
+        return;
+    }
+
+    auto header = ServerNS::RequestHandler::getHeader(fileLength, fileType, 200);
+//    std::cout << header << std::endl;
+    ServerNS::MyServer::respondBack(sockfd, header);
+
+
+    char send_buffer[SocketUtility::bufferSize];
+    FILE *sendFile = fopen(filePath.c_str(), "r");
+    while (sendFile && !feof(sendFile)) {
+        int numRead = fread(send_buffer, sizeof(unsigned char), SocketUtility::bufferSize, sendFile);
+        if( numRead < 1 ) break; // EOF or error
+
+        char *send_buffer_ptr = send_buffer;
+
+        while (numRead > 0) {
+            int numSent = write(sockfd, send_buffer_ptr, numRead);
+            if (numSent < 1) {// 0 if disconnected, otherwise error
+                break; // timeout or error
+            }
+            send_buffer_ptr += numSent;
+            numRead -= numSent;
+        }
+
+    }
 }

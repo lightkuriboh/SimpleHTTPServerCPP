@@ -4,8 +4,6 @@ project(DTLMiniProject)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS -pthread)
 
-#add_executable(DTLMiniProject TryIMG.cpp)
-
 add_executable(DTLMiniProject
         main.cpp
         SocketUtility/Socket.h

@@ -7,13 +7,18 @@
 
 #include <iostream>
 #include <sstream>
-#include <chrono>
+#include <cstring>
+#include <sys/stat.h>
 
 namespace Utils {
     class OtherUtils {
+    private:
+        static void decode(const std::string &s, std::string &destination);
     public:
         static std::string intToString(int x);
-        static long getTimeNow();
+        static std::string normalizeString(const std::string &input);
+        static std::string getFileType(const std::string &fileName);
+        static int getFileSize(const std::string &filePath);
     };
 }
 
