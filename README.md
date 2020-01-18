@@ -8,6 +8,7 @@ $ ./install.sh
 # Run
 $ ./build/DTLMiniProject
 ```
+* The server only returns "Hello World" for each received request now. You can remove "true" in MyServer's constructor in "main.cpp" to enable all features of the server.  
 
 #### WRK (FOR PERFORMANCE TESTING)  
 ```
@@ -20,11 +21,13 @@ $ sudo cp wrk /usr/local/bin
 ```   
 
 # FEATURES SUPPORTED  
-* Multiple clients to connect to the server at the same time  
-* Supports HTTP/1.1 (persistent connection)  
-* Get the response by request type and endpoint  
-    * "GET /" : return home page  
-    * "GET /about" : return about page   
+* Multiple clients to connect to the server at the same time.  
+* Supports HTTP/1.1 (persistent connection).  
+* Get the response by request type and endpoint.  
+    * "GET /" : return home page.  
+    * "GET /about" : return about page.   
+* Get files (image, text, ...)  
+    * "GET /{fileName}": return that file to the client.  
 
 # EXPLANATION
 ```  
@@ -44,7 +47,11 @@ $ sudo cp wrk /usr/local/bin
    * When an EPOLLIN event occurs, then there is a request, I will handle that request and send some response to the client via that corresponding socket.
    * When an EPOLLERR or EPOLLHUP event occurs, I will close that connection.
 
-* When the server is starting up, I load static HTML files to respond based on the request's method and endpoint.
+* When the server is starting up, I load static HTML files (css and js too, but I just loaded HTMLs for now) to respond based on the request's method and endpoint.
+
+* The server supports transfering files. If you open "/about" page, you can see the browser is loading "about.css", "about.js" and images.
+
+* I tended to use ThreadPool to handle "heavy" request, but some unexpected errors occured so I could not complete.
 ```  
 
 
@@ -52,8 +59,4 @@ $ sudo cp wrk /usr/local/bin
 ```
 $ ./wrk -t1 -c10000 -d30s http://127.0.0.1:2101  
 # Testing with 10000 connections kept openned within 30s by 1 thread  
-```  
-* To test the performance on pure requests only (only send back "HelloWorld"), pass "true" as parameter for MyServer's constructor in "main.cpp".  
-
-
-
+```    

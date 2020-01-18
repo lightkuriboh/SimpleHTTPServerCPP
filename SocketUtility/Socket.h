@@ -5,13 +5,14 @@
 #ifndef DTLMINIPROJECT_SOCKET_H
 #define DTLMINIPROJECT_SOCKET_H
 
-#include <iostream>
-#include <cstring>
 #include <cstdio>
+#include <cstring>
+#include <fcntl.h>
+#include <iostream>
+#include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <unistd.h>
-#include <fcntl.h>
+
 #include "../constants.h"
 
 namespace SocketUtility {

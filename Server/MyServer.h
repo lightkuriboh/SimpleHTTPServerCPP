@@ -5,13 +5,14 @@
 #ifndef DTLMINIPROJECT_MYSERVER_H
 #define DTLMINIPROJECT_MYSERVER_H
 
-#include "Server.h"
-#include "../SocketUtility/TCPSocket.h"
-#include <cstring>
-#include "Requests/RESTInformation.h"
-#include "Requests/RequestHandlers.h"
 #include <map>
 #include <fstream>
+#include <cstring>
+
+#include "Server.h"
+#include "Requests/RESTInformation.h"
+#include "Requests/RequestHandlers.h"
+#include "../SocketUtility/TCPSocket.h"
 
 namespace ServerNS {
     class MyServer : public Server {

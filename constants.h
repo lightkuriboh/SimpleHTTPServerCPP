@@ -11,7 +11,7 @@ enum class ReturnStatus {
 };
 
 namespace SocketUtility {
-    constexpr int maximumPendingConnections = 10000;
+    constexpr int maximumPendingConnections = 1000;
     constexpr int maximumConnections = 20000;
     constexpr int bufferSize = 2048;
     constexpr int PORT = 2101;

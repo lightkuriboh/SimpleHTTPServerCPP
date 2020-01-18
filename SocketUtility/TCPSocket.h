@@ -7,10 +7,11 @@
 
 #include <map>
 #include <vector>
-#include <sys/epoll.h>
 #include "Socket.h"
-#include "../EPollUtility/EPollUtilities.h"
+#include <sys/epoll.h>
+
 #include "../Server/Server.h"
+#include "../EPollUtility/EPollUtilities.h"
 
 namespace SocketUtility {
     class TCPSocket : public Socket {

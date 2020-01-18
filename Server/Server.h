@@ -6,9 +6,10 @@
 #define DTLMINIPROJECT_SERVER_H
 
 #include <iostream>
-#include <netinet/in.h>
 #include <unistd.h>
+#include <netinet/in.h>
 #include <sys/socket.h>
+
 #include "../constants.h"
 
 namespace ServerNS {
