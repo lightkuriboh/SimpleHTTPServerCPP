@@ -19,7 +19,7 @@ namespace ServerNS {
     private:
         const std::string GET = "GET";
 
-        const std::string resourcesFolder = "../resources/";
+        const std::string resourcesFolder = "resources/";
         SocketUtility::TCPSocket* tcpSocket = nullptr;
         void getStaticHTMLs();
         std::map<std::string, std::string> *staticHTMLs;

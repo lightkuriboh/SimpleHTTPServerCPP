@@ -7,8 +7,8 @@ int main() {
     std::cout << "Hello, World!" << std::endl;
     Signals::SignalHandler::setSignalHanders();
 
-    ServerNS::MyServer myServer =  ServerNS::MyServer(true);
-//    ServerNS::MyServer myServer = ServerNS::MyServer();
+//    ServerNS::MyServer myServer =  ServerNS::MyServer(true);
+    ServerNS::MyServer myServer = ServerNS::MyServer();
     myServer.start();
 
     return 0;
