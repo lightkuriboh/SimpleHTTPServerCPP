@@ -52,7 +52,9 @@ $ sudo cp wrk /usr/local/bin
 
 * The server supports transfering files. If you open "/about" page, you can see the browser is loading "about.css", "about.js" and images.
 
-* I tended to use ThreadPool to handle "heavy" request, but some unexpected errors occured so I could not complete.
+* I used a Thread Pool to handle "heavy" request (may be transfering a file, search in database, ...). I completed so late because there has been an error with the anonymous function when I called "[&](){}", which resulted in replacing variables' values when the thread is executed.   
+First the "pool" is created with X thread(s) as X workers, which are infinitely looking into a mutex-locked queue of tasks.  
+Whenever the "worker" takes a task from the queue, it just executes it.  
 ```  
 
 

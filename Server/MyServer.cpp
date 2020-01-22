@@ -43,7 +43,10 @@ void ServerNS::MyServer::handleRequest(const int &sockfd) {
     } else {
         if (method == this->GET) {
             endPoint = Utils::OtherUtils::normalizeString(endPoint);
-            ServerNS::MyServer::transferFile(sockfd, endPoint);
+//            std::cout << "Required endpoint" << endPoint << std::endl;
+            this->threadPool.enqueue([] (const int &sockfd, const std::string &endPoint) {
+                ServerNS::MyServer::transferFile(sockfd, endPoint);
+            }, sockfd, endPoint);
         }
     }
 }
@@ -77,7 +80,7 @@ void ServerNS::MyServer::getStaticHTMLs() {
 void ServerNS::MyServer::getStaticHTML(const std::string &name, const std::string &htmlFile) {
     (*this->staticHTMLs)[name] = "";
     std::ifstream fi;
-    fi.open(this->resourcesFolder + htmlFile);
+    fi.open(ServerNS::resourcesFolder + htmlFile);
     std::string line;
     while (getline(fi, line)) {
         (*this->staticHTMLs)[name] += line;
@@ -92,7 +95,8 @@ void ServerNS::MyServer::transferFile(const int &sockfd, const std::string &endP
         fileName += endPoint[i];
     }
     auto fileType = Utils::OtherUtils::getFileType(fileName);
-    auto filePath = this->resourcesFolder + fileName;
+    auto filePath = ServerNS::resourcesFolder + fileName;
+//    std::cout << endPoint << " " << fileName << " " << filePath << std::endl;
     auto fileLength = Utils::OtherUtils::getFileSize(filePath);
     if (fileLength < 0) {
         // file does not exist
@@ -100,9 +104,7 @@ void ServerNS::MyServer::transferFile(const int &sockfd, const std::string &endP
     }
 
     auto header = ServerNS::RequestHandler::getHeader(fileLength, fileType, 200);
-//    std::cout << header << std::endl;
     ServerNS::MyServer::respondBack(sockfd, header);
-
 
     char send_buffer[SocketUtility::bufferSize];
     FILE *sendFile = fopen(filePath.c_str(), "r");
