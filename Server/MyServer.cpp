@@ -96,9 +96,10 @@ void ServerNS::MyServer::transferFile(const int &sockfd, const std::string &endP
     }
     auto fileType = Utils::OtherUtils::getFileType(fileName);
     auto filePath = ServerNS::resourcesFolder + fileName;
-//    std::cout << endPoint << " " << fileName << " " << filePath << std::endl;
+
     auto fileLength = Utils::OtherUtils::getFileSize(filePath);
     if (fileLength < 0) {
+        std::cout << "File does not exist" << "\n";
         // file does not exist
         return;
     }
@@ -124,4 +125,5 @@ void ServerNS::MyServer::transferFile(const int &sockfd, const std::string &endP
         }
 
     }
+    fclose(sendFile);
 }
