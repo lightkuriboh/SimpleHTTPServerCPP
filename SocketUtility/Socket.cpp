@@ -49,7 +49,6 @@ ReturnStatus SocketUtility::Socket::identifySocket() {
 }
 
 void SocketUtility::Socket::start() {
-
     if (this->createSocket() == ReturnStatus::SUCCESS && this->socketOptions() == ReturnStatus::SUCCESS) {
 
         if (this->identifySocket() == ReturnStatus::SUCCESS) {

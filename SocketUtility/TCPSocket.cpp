@@ -24,7 +24,7 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
     std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 55\n\n<html><body style='color:red'>Hello world</body></html>";
 
     int ePollFDs = epoll_create(SocketUtility::maximumConnections + 1);
-//    int ePollFDs = epoll_create1(0);
+
     addNewConnection(ePollFDs, this->socketMaster);
     while (true) {
 
@@ -32,10 +32,8 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
         for (int i = 0; i < numberFDs; ++i) {
             auto sockfd = this->ePollEvents[i].data.fd;
             if (this->ePollEvents[i].events & EPOLLERR || this->ePollEvents[i].events & EPOLLHUP) {
-//                perror("epoll error");
                 close(this->ePollEvents[i].data.fd);
             } else
-            // New connection
             if (sockfd == this->socketMaster) {
                 int newSocket = accept(this->socketMaster, &this->clientAddress, &this->clientAddressLength);
                 if (newSocket < 0) {

@@ -43,8 +43,8 @@ void ServerNS::MyServer::handleRequest(const int &sockfd) {
     } else {
         if (method == this->GET) {
             endPoint = Utils::OtherUtils::normalizeString(endPoint);
-//            std::cout << "Required endpoint" << endPoint << std::endl;
-            this->threadPool.enqueue([] (const int &sockfd, const std::string &endPoint) {
+
+            this->threadPool.enqueue([] (const int sockfd, const std::string &endPoint) {
                 ServerNS::MyServer::transferFile(sockfd, endPoint);
             }, sockfd, endPoint);
         }
@@ -99,8 +99,9 @@ void ServerNS::MyServer::transferFile(const int &sockfd, const std::string &endP
 
     auto fileLength = Utils::OtherUtils::getFileSize(filePath);
     if (fileLength < 0) {
-        std::cout << "File does not exist" << "\n";
-        // file does not exist
+        auto header = ServerNS::RequestHandler::getHeader(14, fileType, 500);
+        ServerNS::MyServer::respondBack(sockfd, header);
+        ServerNS::MyServer::respondBack(sockfd, "File not found");
         return;
     }
 
