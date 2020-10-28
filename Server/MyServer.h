@@ -24,9 +24,9 @@ namespace ServerNS {
 
         const std::string GET = "GET";
 
-        SocketUtility::TCPSocket* tcpSocket = nullptr;
+        std::unique_ptr<SocketUtility::TCPSocket> tcpSocket = nullptr;
         void getStaticHTMLs();
-        std::map<std::string, std::string> *staticHTMLs;
+        std::unique_ptr<std::map<std::string, std::string>> staticHTMLs = nullptr;
         void getStaticHTML(const std::string &name, const std::string &htmlFile);
         static void transferFile(const int &sockfd, const std::string &endPoint);
         static void respondBack(const int &sockfd, const std::string &resp);

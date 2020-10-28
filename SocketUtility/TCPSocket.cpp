@@ -73,6 +73,6 @@ void SocketUtility::TCPSocket::addNewConnection(const int &context, const int &s
     EPollUtility::EPollUtilities::registerToEPoll(context, socketfd, EPOLLIN, EPOLL_CTL_ADD);
 }
 
-void SocketUtility::TCPSocket::initServer(ServerNS::Server *_server) {
-    this->server = _server;
+void SocketUtility::TCPSocket::initServer(std::unique_ptr<ServerNS::Server> _server) {
+    this->server = std::move(_server);
 }

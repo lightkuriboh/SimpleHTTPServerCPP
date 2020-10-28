@@ -52,17 +52,14 @@ void ServerNS::MyServer::handleRequest(const int &sockfd) {
 }
 
 ServerNS::MyServer::MyServer(bool _onlyPureRequest) {
-    this->tcpSocket = new SocketUtility::TCPSocket();
-    this->tcpSocket->initServer(this);
+    this->tcpSocket = std::make_unique<SocketUtility::TCPSocket>();
+    this->tcpSocket->initServer(std::unique_ptr<ServerNS::Server>(this));
     this->setOnlyPureRequest(_onlyPureRequest);
-    this->staticHTMLs = new std::map<std::string, std::string>();
+    this->staticHTMLs = std::make_unique<std::map<std::string, std::string>>();
     this->getStaticHTMLs();
 }
 
-ServerNS::MyServer::~MyServer() {
-    delete this->tcpSocket;
-    delete this->staticHTMLs;
-}
+ServerNS::MyServer::~MyServer() = default;
 
 void ServerNS::MyServer::start() {
     this->tcpSocket->start();

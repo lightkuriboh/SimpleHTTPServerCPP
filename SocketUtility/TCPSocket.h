@@ -6,6 +6,7 @@
 #define DTLMINIPROJECT_TCPSOCKET_H
 
 #include <map>
+#include <memory>
 #include <vector>
 #include "Socket.h"
 #include <sys/epoll.h>
@@ -16,7 +17,7 @@
 namespace SocketUtility {
     class TCPSocket : public Socket {
     private:
-        ServerNS::Server* server;
+        std::unique_ptr<ServerNS::Server> server = nullptr;
         std::vector<epoll_event> ePollEvents;
         ReturnStatus makeSocketListening() override;
         ReturnStatus listeningConnections() override;
@@ -25,7 +26,7 @@ namespace SocketUtility {
         static void closeConnection(const int &context, const int &socketfd);
     public:
         TCPSocket();
-        void initServer(ServerNS::Server* _server);
+        void initServer(std::unique_ptr<ServerNS::Server> _server);
     };
 }
 
