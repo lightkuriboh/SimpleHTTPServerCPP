@@ -10,13 +10,14 @@
 #include <cstring>
 
 #include "Server.h"
-#include "../utils/ThreadPool.h"
+#include "ServerConstants.h"
 #include "Requests/RESTInformation.h"
 #include "Requests/RequestHandlers.h"
+
 #include "../SocketUtility/TCPSocket.h"
+#include "../utils/ThreadPool.h"
 
 namespace ServerNS {
-    const std::string resourcesFolder = "resources/";
     class MyServer : public Server {
     private:
         ThreadPool threadPool = ThreadPool(std::thread::hardware_concurrency());

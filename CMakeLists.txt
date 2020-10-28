@@ -25,4 +25,4 @@ add_executable(DTLMiniProject
         utils/OtherUtils.h
         utils/OtherUtils.cpp
         constants.h
-)
+        Server/ServerConstants.h)
