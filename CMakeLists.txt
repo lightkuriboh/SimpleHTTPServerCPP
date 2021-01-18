@@ -15,7 +15,6 @@ add_executable(DTLMiniProject
         EPollUtility/EPollUtilities.h
         EPollUtility/EPollUtilities.cpp
         Server/Server.h
-        Server/Server.cpp
         Server/MyServer.h
         Server/MyServer.cpp
         Server/Requests/RESTInformation.h

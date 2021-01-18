@@ -27,7 +27,6 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
 
     addNewConnection(ePollFDs, this->socketMaster);
     while (true) {
-
         int numberFDs = epoll_wait(ePollFDs, &*this->ePollEvents.begin(), SocketUtility::maximumConnections, 0);
         for (int i = 0; i < numberFDs; ++i) {
             auto sockfd = this->ePollEvents[i].data.fd;
@@ -47,11 +46,7 @@ ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
                 ) {
                     SocketUtility::TCPSocket::closeConnection(ePollFDs, sockfd);
                 } else {
-                    if (this->server->getOnlyPureRequest()) {
-                        auto signal = write(sockfd, &*hello.begin(), strlen(&*hello.begin()));
-                    } else {
-                         this->server->handleRequest(sockfd);
-                    }
+                    this->server->handleRequest(sockfd);
                 }
             }
         }

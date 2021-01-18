@@ -14,13 +14,9 @@
 
 namespace ServerNS {
     class Server {
-    private:
-        bool onlyPureRequest = false;
     public:
         virtual ~Server() = default;
         virtual void handleRequest(const int &sockfd) = 0;
-        bool getOnlyPureRequest();
-        void setOnlyPureRequest(bool _onlyPureRequest);
     };
 };
 

@@ -44,7 +44,6 @@ namespace SocketUtility {
     public:
         void start();
         Socket();
-
     };
 }
 

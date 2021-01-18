@@ -31,7 +31,7 @@ namespace ServerNS {
         static void transferFile(const int &sockfd, const std::string &endPoint);
         static void respondBack(const int &sockfd, const std::string &resp);
     public:
-        explicit MyServer(bool _onlyPureRequest = false);
+        MyServer();
         ~MyServer() override;
         void start();
         void handleRequest(const int &sockfd) override;

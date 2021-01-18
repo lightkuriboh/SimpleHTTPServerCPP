@@ -51,10 +51,9 @@ void ServerNS::MyServer::handleRequest(const int &sockfd) {
     }
 }
 
-ServerNS::MyServer::MyServer(bool _onlyPureRequest) {
+ServerNS::MyServer::MyServer() {
     this->tcpSocket = std::make_unique<SocketUtility::TCPSocket>();
     this->tcpSocket->initServer(std::unique_ptr<ServerNS::Server>(this));
-    this->setOnlyPureRequest(_onlyPureRequest);
     this->staticHTMLs = std::make_unique<std::map<std::string, std::string>>();
     this->getStaticHTMLs();
 }
