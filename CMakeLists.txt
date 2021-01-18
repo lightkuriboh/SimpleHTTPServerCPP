@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.13)
-project(DTLMiniProject)
+project(SimpleCPPServer)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS -pthread)
+set(CMAKE_CXX_COMPILER "g++-9")
+set(CMAKE_CXX_STANDARD "17")
+set(CMAKE_CXX_FLAGS "-pthread")
 
-add_executable(DTLMiniProject
+add_executable(SimpleCPPServer
         main.cpp
         SocketUtility/Socket.h
         SocketUtility/Socket.cpp
