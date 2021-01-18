@@ -5,17 +5,16 @@
 #ifndef SIMPLECPPSERVER_MYSERVER_H
 #define SIMPLECPPSERVER_MYSERVER_H
 
-#include <map>
-#include <fstream>
 #include <cstring>
+#include <fstream>
+#include <map>
 
-#include "Server.h"
-#include "ServerConstants.h"
 #include "Requests/RESTInformation.h"
 #include "Requests/RequestHandlers.h"
-
-#include "../SocketUtility/TCPSocket.h"
-#include "../utils/ThreadPool.h"
+#include "Server.h"
+#include "ServerConstants.h"
+#include "SocketUtility/TCPSocket.h"
+#include "utils/ThreadPool.h"
 
 namespace ServerNS {
     class MyServer : public Server {

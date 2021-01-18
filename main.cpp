@@ -1,4 +1,3 @@
-#include <iostream>
 
 #include "Server/MyServer.h"
 #include "SignalHandler/SignalHandler.h"

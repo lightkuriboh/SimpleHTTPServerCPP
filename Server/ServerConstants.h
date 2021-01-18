@@ -11,4 +11,4 @@ namespace ServerNS {
     const std::string resourcesFolder = "resources/";
 }
 
-#endif //SIMPLECPPSERVER_SERVERCONSTANTS_H
+#endif //DTLMINIPROJECT_SERVERCONSTANTS_H

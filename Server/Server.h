@@ -5,12 +5,13 @@
 #ifndef SIMPLECPPSERVER_SERVER_H
 #define SIMPLECPPSERVER_SERVER_H
 
-#include <iostream>
-#include <unistd.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <unistd.h>
 
-#include "../constants.h"
+#include <iostream>
+
+#include "constants.h"
 
 namespace ServerNS {
     class Server {

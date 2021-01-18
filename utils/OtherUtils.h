@@ -5,10 +5,10 @@
 #ifndef SIMPLECPPSERVER_OTHERUTILS_H
 #define SIMPLECPPSERVER_OTHERUTILS_H
 
-#include <sstream>
-#include <cstring>
-#include <iostream>
 #include <sys/stat.h>
+
+#include <cstring>
+#include <sstream>
 
 namespace Utils {
     class OtherUtils {

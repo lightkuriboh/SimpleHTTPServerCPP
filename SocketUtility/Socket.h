@@ -5,15 +5,16 @@
 #ifndef SIMPLECPPSERVER_SOCKET_H
 #define SIMPLECPPSERVER_SOCKET_H
 
+#include <fcntl.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <unistd.h>
+
 #include <cstdio>
 #include <cstring>
-#include <fcntl.h>
 #include <iostream>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
 
-#include "../constants.h"
+#include "constants.h"
 
 namespace SocketUtility {
     class Socket {

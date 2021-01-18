@@ -75,8 +75,7 @@ void ServerNS::MyServer::getStaticHTMLs() {
 
 void ServerNS::MyServer::getStaticHTML(const std::string &name, const std::string &htmlFile) {
     (*this->staticHTMLs)[name] = "";
-    std::ifstream fi;
-    fi.open(ServerNS::resourcesFolder + htmlFile);
+    std::ifstream fi(ServerNS::resourcesFolder + htmlFile);
     std::string line;
     while (getline(fi, line)) {
         (*this->staticHTMLs)[name] += line;
