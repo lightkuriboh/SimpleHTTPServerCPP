@@ -6,12 +6,13 @@
 #define DTLMINIPROJECT_SIGNALHANDLER_H
 
 #include <csignal>
+#include <iostream>
+#include <unistd.h>
+#include "../constants.h"
 
 namespace Signals {
-    class SignalHandler {
-    public:
-        static void setSignalHanders();
-    };
+    void keyboardInterruptHandler(int signalNumber);
+    void setSignalHandlers();
 }
 
 #endif //DTLMINIPROJECT_SIGNALHANDLER_H

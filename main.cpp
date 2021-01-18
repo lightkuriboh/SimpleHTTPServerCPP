@@ -4,9 +4,8 @@
 #include "SignalHandler/SignalHandler.h"
 
 int main() {
-    Signals::SignalHandler::setSignalHanders();
+    Signals::setSignalHandlers();
 
-//    ServerNS::MyServer myServer =  ServerNS::MyServer(true);
     ServerNS::MyServer myServer = ServerNS::MyServer();
     myServer.start();
 

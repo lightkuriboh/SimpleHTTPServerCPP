@@ -4,7 +4,12 @@
 
 #include "SignalHandler.h"
 
-void Signals::SignalHandler::setSignalHanders() {
-    signal(SIGPIPE, SIG_IGN);
+void Signals::setSignalHandlers() {
+    signal(SIGINT, keyboardInterruptHandler);
+}
+
+void Signals::keyboardInterruptHandler(int signalNumber) {
+    close(SocketUtility::PORT);
+    exit(signalNumber);
 }
 
