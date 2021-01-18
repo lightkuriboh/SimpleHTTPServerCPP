@@ -8,8 +8,7 @@ $ ./install.sh
 # Run
 $ ./build/DTLMiniProject
 ```
-* You may need to increase OpenFiles Limit (ulimit -n) to 20000 in local environment to handle more connections.
-* The server only returns "Hello World" for each received request now. You can remove "true" in MyServer's constructor in "main.cpp" to enable all features of the server.  
+* You may need to increase OpenFiles Limit (ulimit -n) to 20000 in local environment to handle more connections. 
 
 #### WRK (FOR PERFORMANCE TESTING)  
 ```

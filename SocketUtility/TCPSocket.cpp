@@ -20,9 +20,6 @@ ReturnStatus SocketUtility::TCPSocket::makeSocketListening() {
 }
 
 ReturnStatus SocketUtility::TCPSocket::listeningConnections() {
-
-    std::string hello = "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 55\n\n<html><body style='color:red'>Hello world</body></html>";
-
     int ePollFDs = epoll_create(SocketUtility::maximumConnections + 1);
 
     addNewConnection(ePollFDs, this->socketMaster);
