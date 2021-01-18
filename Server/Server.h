@@ -2,8 +2,8 @@
 // Created by kuribohkute on 15/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_SERVER_H
-#define DTLMINIPROJECT_SERVER_H
+#ifndef SIMPLECPPSERVER_SERVER_H
+#define SIMPLECPPSERVER_SERVER_H
 
 #include <iostream>
 #include <unistd.h>
@@ -20,4 +20,4 @@ namespace ServerNS {
     };
 };
 
-#endif //DTLMINIPROJECT_SERVER_H
+#endif //SIMPLECPPSERVER_SERVER_H

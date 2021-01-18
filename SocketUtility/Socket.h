@@ -2,8 +2,8 @@
 // Created by kuribohkute on 14/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_SOCKET_H
-#define DTLMINIPROJECT_SOCKET_H
+#ifndef SIMPLECPPSERVER_SOCKET_H
+#define SIMPLECPPSERVER_SOCKET_H
 
 #include <cstdio>
 #include <cstring>
@@ -47,4 +47,4 @@ namespace SocketUtility {
     };
 }
 
-#endif //DTLMINIPROJECT_SOCKET_H
+#endif //SIMPLECPPSERVER_SOCKET_H

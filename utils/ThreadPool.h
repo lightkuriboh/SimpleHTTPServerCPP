@@ -2,8 +2,8 @@
 // Created by kuribohkute on 16/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_THREADPOOL_H
-#define DTLMINIPROJECT_THREADPOOL_H
+#ifndef SIMPLECPPSERVER_THREADPOOL_H
+#define SIMPLECPPSERVER_THREADPOOL_H
 
 #include <vector>
 #include <queue>
@@ -90,4 +90,4 @@ inline ThreadPool::~ThreadPool() {
         worker.join();
 }
 
-#endif //DTLMINIPROJECT_THREADPOOL_H
+#endif //SIMPLECPPSERVER_THREADPOOL_H

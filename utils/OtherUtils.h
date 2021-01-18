@@ -2,8 +2,8 @@
 // Created by kuribohkute on 17/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_OTHERUTILS_H
-#define DTLMINIPROJECT_OTHERUTILS_H
+#ifndef SIMPLECPPSERVER_OTHERUTILS_H
+#define SIMPLECPPSERVER_OTHERUTILS_H
 
 #include <sstream>
 #include <cstring>
@@ -22,4 +22,4 @@ namespace Utils {
     };
 }
 
-#endif //DTLMINIPROJECT_OTHERUTILS_H
+#endif //SIMPLECPPSERVER_OTHERUTILS_H

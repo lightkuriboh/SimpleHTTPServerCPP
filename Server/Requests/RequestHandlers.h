@@ -2,8 +2,8 @@
 // Created by kuribohkute on 16/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_REQUESTHANDLERS_H
-#define DTLMINIPROJECT_REQUESTHANDLERS_H
+#ifndef SIMPLECPPSERVER_REQUESTHANDLERS_H
+#define SIMPLECPPSERVER_REQUESTHANDLERS_H
 
 #include <set>
 #include <iostream>
@@ -21,4 +21,4 @@ namespace ServerNS {
     };
 }
 
-#endif //DTLMINIPROJECT_REQUESTHANDLERS_H
+#endif //SIMPLECPPSERVER_REQUESTHANDLERS_H

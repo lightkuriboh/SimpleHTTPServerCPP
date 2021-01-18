@@ -2,8 +2,8 @@
 // Created by kuribohkute on 16/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_RESTINFORMATION_H
-#define DTLMINIPROJECT_RESTINFORMATION_H
+#ifndef SIMPLECPPSERVER_RESTINFORMATION_H
+#define SIMPLECPPSERVER_RESTINFORMATION_H
 
 #include <cstring>
 #include <iostream>
@@ -17,4 +17,4 @@ namespace ServerNS {
     };
 }
 
-#endif //DTLMINIPROJECT_RESTINFORMATION_H
+#endif //SIMPLECPPSERVER_RESTINFORMATION_H

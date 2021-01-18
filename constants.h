@@ -2,8 +2,8 @@
 // Created by kuribohkute on 14/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_CONSTANTS_H
-#define DTLMINIPROJECT_CONSTANTS_H
+#ifndef SIMPLECPPSERVER_CONSTANTS_H
+#define SIMPLECPPSERVER_CONSTANTS_H
 
 enum class ReturnStatus {
     SUCCESS,
@@ -17,4 +17,4 @@ namespace SocketUtility {
     constexpr int PORT = 2101;
 }
 
-#endif //DTLMINIPROJECT_CONSTANTS_H
+#endif //SIMPLECPPSERVER_CONSTANTS_H

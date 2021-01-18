@@ -2,8 +2,8 @@
 // Created by kuribohkute on 15/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_EPOLLUTILITY_H
-#define DTLMINIPROJECT_EPOLLUTILITY_H
+#ifndef SIMPLECPPSERVER_EPOLLUTILITY_H
+#define SIMPLECPPSERVER_EPOLLUTILITY_H
 
 #include <sys/epoll.h>
 
@@ -14,4 +14,4 @@ namespace EPollUtility {
     };
 }
 
-#endif //DTLMINIPROJECT_EPOLLUTILITY_H
+#endif //SIMPLECPPSERVER_EPOLLUTILITY_H

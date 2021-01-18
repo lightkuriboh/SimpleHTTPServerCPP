@@ -2,8 +2,8 @@
 // Created by kuribohkute on 14/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_TCPSOCKET_H
-#define DTLMINIPROJECT_TCPSOCKET_H
+#ifndef SIMPLECPPSERVER_TCPSOCKET_H
+#define SIMPLECPPSERVER_TCPSOCKET_H
 
 #include <map>
 #include <memory>
@@ -30,4 +30,4 @@ namespace SocketUtility {
     };
 }
 
-#endif //DTLMINIPROJECT_TCPSOCKET_H
+#endif //SIMPLECPPSERVER_TCPSOCKET_H

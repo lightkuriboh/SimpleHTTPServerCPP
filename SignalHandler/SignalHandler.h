@@ -2,8 +2,8 @@
 // Created by kuribohkute on 15/01/2020.
 //
 
-#ifndef DTLMINIPROJECT_SIGNALHANDLER_H
-#define DTLMINIPROJECT_SIGNALHANDLER_H
+#ifndef SIMPLECPPSERVER_SIGNALHANDLER_H
+#define SIMPLECPPSERVER_SIGNALHANDLER_H
 
 #include <csignal>
 #include <iostream>
@@ -15,4 +15,4 @@ namespace Signals {
     void setSignalHandlers();
 }
 
-#endif //DTLMINIPROJECT_SIGNALHANDLER_H
+#endif //SIMPLECPPSERVER_SIGNALHANDLER_H
