@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace ServerNS {
+namespace SimpleCPPServer {
     class RequestHandler {
     public:
         static std::string resp(const std::string &html);

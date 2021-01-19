@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace ServerNS {
+namespace SimpleCPPServer {
     struct REST_INFORMATION {
         std::string method;
         std::string endPoint;

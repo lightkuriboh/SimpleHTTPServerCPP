@@ -11,8 +11,8 @@
 #include "ServerConstants.h"
 #include "utils/OtherUtils.h"
 
-void ServerNS::MyServer::handleRequest(const int &sockfd) {
-    char buffer[SocketUtility::bufferSize] = {0};
+void SimpleCPPServer::MyServer::handleRequest(const int &sockfd) {
+    char buffer[SimpleCPPServer::bufferSize] = {0};
 
     auto readValue = read(sockfd, buffer, sizeof(buffer));
 
@@ -28,10 +28,10 @@ void ServerNS::MyServer::handleRequest(const int &sockfd) {
         reqInfo += buffer[i];
     }
 
-    auto [method, endPoint] = ServerNS::REST_INFORMATION::parseInformation(reqInfo);
+    auto [method, endPoint] = SimpleCPPServer::REST_INFORMATION::parseInformation(reqInfo);
 
     if (method == this->GET && endPoint == "/") {
-        respondBack(sockfd, ServerNS::RequestHandler::getIndexPage());
+        respondBack(sockfd, SimpleCPPServer::RequestHandler::getIndexPage());
         return;
     }
 
@@ -46,43 +46,43 @@ void ServerNS::MyServer::handleRequest(const int &sockfd) {
         isGetStaticHTML = true;
     }
     if (isGetStaticHTML) {
-        ServerNS::MyServer::respondBack(sockfd, resp);
+        SimpleCPPServer::MyServer::respondBack(sockfd, resp);
     } else {
         if (method == this->GET) {
             endPoint = Utils::OtherUtils::normalizeString(endPoint);
 
             this->threadPool.enqueue([] (const int sockfd, const std::string &endPoint) {
-                ServerNS::MyServer::transferFile(sockfd, endPoint);
+                SimpleCPPServer::MyServer::transferFile(sockfd, endPoint);
             }, sockfd, endPoint);
         }
     }
 }
 
-ServerNS::MyServer::MyServer() {
-    this->tcpSocket = std::make_unique<SocketUtility::TCPSocket>();
-    this->tcpSocket->initServer(std::unique_ptr<ServerNS::Server>(this));
+SimpleCPPServer::MyServer::MyServer() {
+    this->tcpSocket = std::make_unique<SimpleCPPServer::TCPSocket>();
+    this->tcpSocket->initServer(std::unique_ptr<SimpleCPPServer::Server>(this));
     this->staticHTMLs = std::make_unique<std::map<std::string, std::string>>();
     this->getStaticHTMLs();
 }
 
-ServerNS::MyServer::~MyServer() = default;
+SimpleCPPServer::MyServer::~MyServer() = default;
 
-void ServerNS::MyServer::start() {
+void SimpleCPPServer::MyServer::start() {
     this->tcpSocket->start();
 }
 
-void ServerNS::MyServer::respondBack(const int &sockfd, const std::string &resp) {
+void SimpleCPPServer::MyServer::respondBack(const int &sockfd, const std::string &resp) {
     auto signal = write(sockfd, &*resp.begin(), strlen(&*resp.begin()));
 }
 
-void ServerNS::MyServer::getStaticHTMLs() {
+void SimpleCPPServer::MyServer::getStaticHTMLs() {
     this->getStaticHTML("index", "index.html");
     this->getStaticHTML("about", "about.html");
 }
 
-void ServerNS::MyServer::getStaticHTML(const std::string &name, const std::string &htmlFile) {
+void SimpleCPPServer::MyServer::getStaticHTML(const std::string &name, const std::string &htmlFile) {
     (*this->staticHTMLs)[name] = "";
-    std::ifstream fi(ServerNS::resourcesFolder + htmlFile);
+    std::ifstream fi(SimpleCPPServer::resourcesFolder + htmlFile);
     std::string line;
     while (getline(fi, line)) {
         (*this->staticHTMLs)[name] += line;
@@ -90,30 +90,30 @@ void ServerNS::MyServer::getStaticHTML(const std::string &name, const std::strin
     fi.close();
 }
 
-void ServerNS::MyServer::transferFile(const int &sockfd, const std::string &endPoint) {
+void SimpleCPPServer::MyServer::transferFile(const int &sockfd, const std::string &endPoint) {
     std::string fileName;
     auto n = endPoint.size();
     for (auto i = 1; i < n; i++) {
         fileName += endPoint[i];
     }
     auto fileType = Utils::OtherUtils::getFileType(fileName);
-    auto filePath = ServerNS::resourcesFolder + fileName;
+    auto filePath = SimpleCPPServer::resourcesFolder + fileName;
 
     auto fileLength = Utils::OtherUtils::getFileSize(filePath);
     if (fileLength < 0) {
-        auto header = ServerNS::RequestHandler::getHeader(14, fileType, 500);
-        ServerNS::MyServer::respondBack(sockfd, header);
-        ServerNS::MyServer::respondBack(sockfd, "File not found");
+        auto header = SimpleCPPServer::RequestHandler::getHeader(14, fileType, 500);
+        SimpleCPPServer::MyServer::respondBack(sockfd, header);
+        SimpleCPPServer::MyServer::respondBack(sockfd, "File not found");
         return;
     }
 
-    auto header = ServerNS::RequestHandler::getHeader(fileLength, fileType, 200);
-    ServerNS::MyServer::respondBack(sockfd, header);
+    auto header = SimpleCPPServer::RequestHandler::getHeader(fileLength, fileType, 200);
+    SimpleCPPServer::MyServer::respondBack(sockfd, header);
 
-    char send_buffer[SocketUtility::bufferSize];
+    char send_buffer[SimpleCPPServer::bufferSize];
     FILE *sendFile = fopen(filePath.c_str(), "r");
     while (sendFile && !feof(sendFile)) {
-        int numRead = fread(send_buffer, sizeof(unsigned char), SocketUtility::bufferSize, sendFile);
+        int numRead = fread(send_buffer, sizeof(unsigned char), SimpleCPPServer::bufferSize, sendFile);
         if( numRead < 1 ) break; // EOF or error
 
         char *send_buffer_ptr = send_buffer;

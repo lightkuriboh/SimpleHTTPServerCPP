@@ -10,7 +10,7 @@ enum class ReturnStatus {
     FAILURE
 };
 
-namespace SocketUtility {
+namespace SimpleCPPServer {
     constexpr int maximumPendingConnections = 1000;
     constexpr int maximumConnections = 20000;
     constexpr int bufferSize = 2048;

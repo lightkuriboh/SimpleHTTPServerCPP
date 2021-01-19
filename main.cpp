@@ -5,7 +5,7 @@
 int main() {
     Signals::setSignalHandlers();
 
-    ServerNS::MyServer myServer = ServerNS::MyServer();
+    SimpleCPPServer::MyServer myServer = SimpleCPPServer::MyServer();
     myServer.start();
 
     return 0;

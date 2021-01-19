@@ -13,7 +13,7 @@ void Signals::setSignalHandlers() {
 }
 
 void Signals::keyboardInterruptHandler(int signalNumber) {
-    close(SocketUtility::PORT);
+    close(SimpleCPPServer::PORT);
     exit(signalNumber);
 }
 

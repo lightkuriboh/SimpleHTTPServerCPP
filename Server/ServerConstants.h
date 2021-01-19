@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace ServerNS {
+namespace SimpleCPPServer {
     const std::string resourcesFolder = "resources/";
 }
 
