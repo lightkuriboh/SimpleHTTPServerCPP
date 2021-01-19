@@ -1,6 +1,4 @@
-//
-// Created by kuribohkute on 14/01/2020.
-//
+
 #include "Socket.h"
 
 #include <sys/socket.h>

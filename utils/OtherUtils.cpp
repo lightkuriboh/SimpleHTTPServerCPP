@@ -1,6 +1,3 @@
-//
-// Created by kuribohkute on 17/01/2020.
-//
 
 #include "OtherUtils.h"
 

@@ -1,6 +1,3 @@
-//
-// Created by kuribohkute on 15/01/2020.
-//
 
 #include "MyServer.h"
 

@@ -1,11 +1,7 @@
-//
-// Created by kuribohkute on 16/01/2020.
-//
 
 #include "RequestHandlers.h"
 
 #include <set>
-#include <iostream>
 
 #include "utils/OtherUtils.h"
 

@@ -1,6 +1,3 @@
-//
-// Created by kuribohkute on 16/01/2020.
-//
 
 #ifndef SIMPLECPPSERVER_RESTINFORMATION_H
 #define SIMPLECPPSERVER_RESTINFORMATION_H

@@ -1,6 +1,3 @@
-//
-// Created by kuribohkute on 17/01/2020.
-//
 
 #ifndef SIMPLECPPSERVER_OTHERUTILS_H
 #define SIMPLECPPSERVER_OTHERUTILS_H

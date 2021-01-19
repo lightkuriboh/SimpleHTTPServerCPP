@@ -1,6 +1,3 @@
-//
-// Created by kuribohkute on 14/01/2020.
-//
 
 #ifndef SIMPLECPPSERVER_TCPSOCKET_H
 #define SIMPLECPPSERVER_TCPSOCKET_H

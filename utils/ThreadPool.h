@@ -1,6 +1,3 @@
-//
-// Created by kuribohkute on 16/01/2020.
-//
 
 #ifndef SIMPLECPPSERVER_THREADPOOL_H
 #define SIMPLECPPSERVER_THREADPOOL_H
@@ -42,7 +39,6 @@ inline ThreadPool::ThreadPool(size_t threads)
                 [this] {
                     for(; ; ) {
                         std::function<void()> task;
-
                         {
                             std::unique_lock<std::mutex> lock(this->queue_mutex);
                             this->condition.wait(lock,[this]{ return this->stop || !this->tasks.empty(); });
