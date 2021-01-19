@@ -5,14 +5,7 @@
 #ifndef SIMPLECPPSERVER_SOCKET_H
 #define SIMPLECPPSERVER_SOCKET_H
 
-#include <fcntl.h>
 #include <netinet/in.h>
-#include <sys/socket.h>
-#include <unistd.h>
-
-#include <cstdio>
-#include <cstring>
-#include <iostream>
 
 #include "constants.h"
 
@@ -33,7 +26,6 @@ namespace SocketUtility {
     protected:
         sockaddr_in address{};
         sockaddr clientAddress{};
-        socklen_t addressLength = 0;
         socklen_t clientAddressLength = 0;
 
         int socketMaster = 0;

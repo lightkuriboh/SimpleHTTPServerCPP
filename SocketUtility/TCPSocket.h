@@ -5,15 +5,13 @@
 #ifndef SIMPLECPPSERVER_TCPSOCKET_H
 #define SIMPLECPPSERVER_TCPSOCKET_H
 
-#include "Socket.h"
-
 #include <sys/epoll.h>
 
-#include <map>
 #include <memory>
 #include <vector>
 
 #include "Server/Server.h"
+#include "Socket.h"
 #include "EPollUtility/EPollUtilities.h"
 
 namespace SocketUtility {

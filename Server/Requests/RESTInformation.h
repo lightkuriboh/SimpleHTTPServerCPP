@@ -5,8 +5,7 @@
 #ifndef SIMPLECPPSERVER_RESTINFORMATION_H
 #define SIMPLECPPSERVER_RESTINFORMATION_H
 
-#include <cstring>
-#include <iostream>
+#include <string>
 
 namespace ServerNS {
     struct REST_INFORMATION {

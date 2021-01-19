@@ -2,7 +2,10 @@
 // Created by kuribohkute on 14/01/2020.
 //
 #include "TCPSocket.h"
-#include "../Server/MyServer.h"
+
+#include <unistd.h>
+
+#include <map>
 
 SocketUtility::TCPSocket::TCPSocket(): Socket() {
     this->server = nullptr;

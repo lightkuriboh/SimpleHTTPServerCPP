@@ -4,6 +4,11 @@
 
 #include "RequestHandlers.h"
 
+#include <set>
+#include <iostream>
+
+#include "utils/OtherUtils.h"
+
 std::string ServerNS::RequestHandler::contentType(const std::string &fileType) {
     std::string ans = "Content-Type: ";
 

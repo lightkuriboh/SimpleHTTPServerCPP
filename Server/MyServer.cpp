@@ -4,6 +4,16 @@
 
 #include "MyServer.h"
 
+#include <unistd.h>
+
+#include <fstream>
+#include <cstring>
+
+#include "Requests/RESTInformation.h"
+#include "Requests/RequestHandlers.h"
+#include "ServerConstants.h"
+#include "utils/OtherUtils.h"
+
 void ServerNS::MyServer::handleRequest(const int &sockfd) {
     char buffer[SocketUtility::bufferSize] = {0};
 

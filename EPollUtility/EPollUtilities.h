@@ -5,8 +5,6 @@
 #ifndef SIMPLECPPSERVER_EPOLLUTILITY_H
 #define SIMPLECPPSERVER_EPOLLUTILITY_H
 
-#include <sys/epoll.h>
-
 namespace EPollUtility {
     class EPollUtilities {
     public:

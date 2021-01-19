@@ -4,6 +4,10 @@
 
 #include "OtherUtils.h"
 
+#include <sys/stat.h>
+
+#include <sstream>
+
 std::string Utils::OtherUtils::intToString(int x) {
     std::string res;
     std::stringstream ss;

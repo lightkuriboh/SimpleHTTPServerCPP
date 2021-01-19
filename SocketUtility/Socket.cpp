@@ -3,6 +3,12 @@
 //
 #include "Socket.h"
 
+#include <sys/socket.h>
+#include <unistd.h>
+
+#include <cstdio>
+#include <iostream>
+
 ReturnStatus SocketUtility::Socket::createSocket() {
     this->socketMaster = socket(this->communicationDomain, this->communicationType, this->socketProtocol);
 
@@ -24,8 +30,6 @@ ReturnStatus SocketUtility::Socket::socketOptions() {
 }
 
 void SocketUtility::Socket::setUpAddress(int port) {
-    this->addressLength = sizeof(address);
-
     this->address.sin_family = communicationDomain;
     this->address.sin_addr.s_addr = INADDR_ANY;
     this->address.sin_port = htons(port);
@@ -68,7 +72,6 @@ SocketUtility::Socket::Socket() {
     this->clientAddress = sockaddr{};
     this->clientAddressLength = sizeof(this->clientAddress);
     this->address = sockaddr_in{};
-    this->addressLength = sizeof(this->address);
 
 }
 
