@@ -6,14 +6,14 @@
 
 #include "constants.h"
 
-namespace SimpleCPPServer {
+namespace SimpleHTTPServer {
     class Socket {
     private:
         int communicationDomain = AF_INET;
         int communicationType = SOCK_STREAM;
         int socketProtocol = 0;
         int socketOption = 0;
-        int activePORT = SimpleCPPServer::PORT;
+        int activePORT = SimpleHTTPServer::PORT;
 
         ReturnStatus createSocket();
         ReturnStatus socketOptions();

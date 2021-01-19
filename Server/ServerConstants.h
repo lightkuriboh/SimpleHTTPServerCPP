@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace SimpleCPPServer {
+namespace SimpleHTTPServer {
     const std::string resourcesFolder = "resources/";
 }
 

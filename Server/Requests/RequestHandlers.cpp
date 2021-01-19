@@ -5,7 +5,7 @@
 
 #include "utils/OtherUtils.h"
 
-std::string SimpleCPPServer::RequestHandler::contentType(const std::string &fileType) {
+std::string SimpleHTTPServer::RequestHandler::contentType(const std::string &fileType) {
     std::string ans = "Content-Type: ";
 
     std::set<std::string> textFiles = {"html", "css", "js"};
@@ -28,12 +28,12 @@ std::string SimpleCPPServer::RequestHandler::contentType(const std::string &file
     return ans;
 }
 
-std::string SimpleCPPServer::RequestHandler::resp(const std::string &html) {
-    std::string result = SimpleCPPServer::RequestHandler::getHeader(html.size(), "html", 200) + html;
+std::string SimpleHTTPServer::RequestHandler::resp(const std::string &html) {
+    std::string result = SimpleHTTPServer::RequestHandler::getHeader(html.size(), "html", 200) + html;
     return result;
 }
 
-std::string SimpleCPPServer::RequestHandler::responseStatus(const int &statusCode) {
+std::string SimpleHTTPServer::RequestHandler::responseStatus(const int &statusCode) {
     std::string ans = "200 OK\n";
     if (statusCode != 200) {
 
@@ -42,16 +42,16 @@ std::string SimpleCPPServer::RequestHandler::responseStatus(const int &statusCod
 }
 
 std::string
-SimpleCPPServer::RequestHandler::getHeader(const int &contentLength, const std::string &fileType, const int &statusCode) {
+SimpleHTTPServer::RequestHandler::getHeader(const int &contentLength, const std::string &fileType, const int &statusCode) {
     return "HTTP/1.1 "
-           + SimpleCPPServer::RequestHandler::responseStatus(statusCode)
-           + SimpleCPPServer::RequestHandler::contentType(fileType)
+           + SimpleHTTPServer::RequestHandler::responseStatus(statusCode)
+           + SimpleHTTPServer::RequestHandler::contentType(fileType)
            + "Content-Length: "
            + Utils::OtherUtils::intToString(contentLength)
            + "\n\n"
         ;
 }
 
-std::string SimpleCPPServer::RequestHandler::getIndexPage() {
+std::string SimpleHTTPServer::RequestHandler::getIndexPage() {
     return "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 107\n\n<html><body style='color:red;text-align:center'>Hello world<br><hr><a href='/about'>About</a></body></html>";
 }

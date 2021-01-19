@@ -5,27 +5,27 @@
 
 #include <map>
 
-SimpleCPPServer::TCPSocket::TCPSocket(): Socket() {
+SimpleHTTPServer::TCPSocket::TCPSocket(): Socket() {
     this->server = nullptr;
     initSocket(AF_INET, SOCK_STREAM);
-    this->ePollEvents.resize(SimpleCPPServer::maximumConnections + 1);
+    this->ePollEvents.resize(SimpleHTTPServer::maximumConnections + 1);
 }
 
-ReturnStatus SimpleCPPServer::TCPSocket::makeSocketListening() {
+ReturnStatus SimpleHTTPServer::TCPSocket::makeSocketListening() {
     // tells a socket that it should be capable of accepting incoming connections
-    if (listen(this->socketMaster, SimpleCPPServer::maximumPendingConnections) < 0) {
+    if (listen(this->socketMaster, SimpleHTTPServer::maximumPendingConnections) < 0) {
         perror("Listening already");
         return ReturnStatus::FAILURE;
     }
     return ReturnStatus::SUCCESS;
 }
 
-ReturnStatus SimpleCPPServer::TCPSocket::listeningConnections() {
-    int ePollFDs = epoll_create(SimpleCPPServer::maximumConnections + 1);
+ReturnStatus SimpleHTTPServer::TCPSocket::listeningConnections() {
+    int ePollFDs = epoll_create(SimpleHTTPServer::maximumConnections + 1);
 
     addNewConnection(ePollFDs, this->socketMaster);
     while (true) {
-        int numberFDs = epoll_wait(ePollFDs, &*this->ePollEvents.begin(), SimpleCPPServer::maximumConnections, 0);
+        int numberFDs = epoll_wait(ePollFDs, &*this->ePollEvents.begin(), SimpleHTTPServer::maximumConnections, 0);
         for (int i = 0; i < numberFDs; ++i) {
             auto socketFileDescriptor = this->ePollEvents[i].data.fd;
             if (this->ePollEvents[i].events & EPOLLERR || this->ePollEvents[i].events & EPOLLHUP) {
@@ -37,12 +37,12 @@ ReturnStatus SimpleCPPServer::TCPSocket::listeningConnections() {
                     perror("Accepting!");
                     return ReturnStatus::FAILURE;
                 }
-                SimpleCPPServer::TCPSocket::addNewConnection(ePollFDs, newSocket);
+                SimpleHTTPServer::TCPSocket::addNewConnection(ePollFDs, newSocket);
             } else {
                 if (this->ePollEvents[i].events & EPOLLERR   // some errors happened with the file descriptor
                 || this->ePollEvents[i].events & EPOLLHUP    // peer had closed its side of the channel
                 ) {
-                    SimpleCPPServer::TCPSocket::closeConnection(ePollFDs, socketFileDescriptor);
+                    SimpleHTTPServer::TCPSocket::closeConnection(ePollFDs, socketFileDescriptor);
                 } else {
                     this->server->handleRequest(socketFileDescriptor);
                 }
@@ -51,21 +51,21 @@ ReturnStatus SimpleCPPServer::TCPSocket::listeningConnections() {
     }
 }
 
-void SimpleCPPServer::TCPSocket::startingSocket() {
+void SimpleHTTPServer::TCPSocket::startingSocket() {
     if (makeSocketListening() == ReturnStatus::SUCCESS) {
         listeningConnections();
     }
 }
 
-void SimpleCPPServer::TCPSocket::closeConnection(const int &context, const int &socketFileDescriptor) {
+void SimpleHTTPServer::TCPSocket::closeConnection(const int &context, const int &socketFileDescriptor) {
     LibraryWrapper::EPoll::removeFromEpoll(context, socketFileDescriptor);
     close(socketFileDescriptor);
 }
 
-void SimpleCPPServer::TCPSocket::addNewConnection(const int &context, const int &socketFileDescriptor) {
+void SimpleHTTPServer::TCPSocket::addNewConnection(const int &context, const int &socketFileDescriptor) {
     LibraryWrapper::EPoll::addToEpoll(context, socketFileDescriptor);
 }
 
-void SimpleCPPServer::TCPSocket::initServer(std::unique_ptr<SimpleCPPServer::Server> _server) {
+void SimpleHTTPServer::TCPSocket::initServer(std::unique_ptr<SimpleHTTPServer::Server> _server) {
     this->server = std::move(_server);
 }

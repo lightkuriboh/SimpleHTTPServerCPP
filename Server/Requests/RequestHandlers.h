@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace SimpleCPPServer {
+namespace SimpleHTTPServer {
     class RequestHandler {
     public:
         static std::string resp(const std::string &html);

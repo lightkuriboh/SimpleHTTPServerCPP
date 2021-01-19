@@ -2,7 +2,7 @@
 #ifndef SIMPLECPPSERVER_SERVER_H
 #define SIMPLECPPSERVER_SERVER_H
 
-namespace SimpleCPPServer {
+namespace SimpleHTTPServer {
     class Server {
     public:
         virtual ~Server() = default;

@@ -11,10 +11,10 @@
 #include "Server/Server.h"
 #include "Socket.h"
 
-namespace SimpleCPPServer {
+namespace SimpleHTTPServer {
     class TCPSocket : public Socket {
     private:
-        std::unique_ptr<SimpleCPPServer::Server> server = nullptr;
+        std::unique_ptr<SimpleHTTPServer::Server> server = nullptr;
         std::vector<epoll_event> ePollEvents;
         ReturnStatus makeSocketListening() override;
         ReturnStatus listeningConnections() override;
@@ -23,7 +23,7 @@ namespace SimpleCPPServer {
         static void closeConnection(const int &context, const int &socketFileDescriptor);
     public:
         TCPSocket();
-        void initServer(std::unique_ptr<SimpleCPPServer::Server> _server);
+        void initServer(std::unique_ptr<SimpleHTTPServer::Server> _server);
     };
 }
 
