@@ -9,9 +9,6 @@
 namespace SimpleHTTPServer {
     class TCPSocket {
     private:
-        int communicationDomain = AF_INET;
-        int communicationType = SOCK_STREAM;
-        int socketProtocol = 0; // Default protocol
         int socketOption = 0;
         int activePORT = SimpleHTTPServer::PORT;
         sockaddr_in address{};
