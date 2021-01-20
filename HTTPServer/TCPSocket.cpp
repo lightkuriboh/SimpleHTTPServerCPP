@@ -16,10 +16,8 @@ SimpleHTTPServer::TCPSocket::TCPSocket() {
                 }
             }
         }
+        close(this->socketMaster);
     }
-
-    std::cout << "starting socket error\n";
-    close(this->socketMaster);
     exit(1);
 }
 
