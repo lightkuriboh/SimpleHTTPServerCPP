@@ -18,6 +18,7 @@ namespace LibraryWrapper {
         static int getChangedEPollEvents(const int &ePollContext, std::vector<epoll_event>& epollEvents);
         static bool errorOccurredWithEPollEvent(const epoll_event &ePollEvent);
         static bool clientClosedTheConnection(const epoll_event &ePollEvent);
+        static int creatEPollContext(const int &ePollSize);
     };
 }
 

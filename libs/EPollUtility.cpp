@@ -31,3 +31,7 @@ bool LibraryWrapper::EPoll::clientClosedTheConnection(const epoll_event &ePollEv
     return ePollEvent.events & EPOLLHUP;
 }
 
+int LibraryWrapper::EPoll::creatEPollContext(const int &ePollSize) {
+    return epoll_create(ePollSize);
+}
+

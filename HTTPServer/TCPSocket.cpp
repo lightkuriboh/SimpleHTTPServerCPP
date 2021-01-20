@@ -1,10 +1,11 @@
 
 #include "HTTPServer/TCPSocket.h"
 
-#include <sys/socket.h>
 #include <unistd.h>
 
 #include <iostream>
+
+#include "libs/SocketUtility.h"
 
 SimpleHTTPServer::TCPSocket::TCPSocket() {
     if (this->createSocket() == ReturnStatus::SUCCESS) {
@@ -22,41 +23,40 @@ SimpleHTTPServer::TCPSocket::TCPSocket() {
 }
 
 ReturnStatus SimpleHTTPServer::TCPSocket::createSocket() {
-    this->socketMaster = socket(this->communicationDomain, this->communicationType, this->socketProtocol);
-    if (this->socketMaster < 0) {
-        perror("Error creating socket");
-        return ReturnStatus::FAILURE;
+    this->socketMaster = LibraryWrapper::Socket::createTCPSocket();
+    if (LibraryWrapper::Socket::createSocketSuccessfully(this->socketMaster)) {
+        return ReturnStatus::SUCCESS;
     }
-    return ReturnStatus::SUCCESS;
+
+    perror("Error creating socket");
+    return ReturnStatus::FAILURE;
 }
 
-ReturnStatus SimpleHTTPServer::TCPSocket::socketOptions() {
-    if (setsockopt(this->socketMaster, SOL_SOCKET, SO_REUSEADDR, &this->socketOption, sizeof(int))) {
-        perror("setsockopt");
-        return ReturnStatus::FAILURE;
+ReturnStatus SimpleHTTPServer::TCPSocket::socketOptions() const {
+    if (LibraryWrapper::Socket::setSocketOptionsSuccessfully(this->socketMaster, this->socketOption)) {
+        return ReturnStatus::SUCCESS;
     }
-    return ReturnStatus::SUCCESS;
-}
 
-void SimpleHTTPServer::TCPSocket::setUpAddress(int port) {
-    this->address.sin_family = communicationDomain;
-    this->address.sin_addr.s_addr = INADDR_ANY;
-    this->address.sin_port = htons(port);
+    perror("Error setting up socket options");
+    return ReturnStatus::FAILURE;
 }
 
 ReturnStatus SimpleHTTPServer::TCPSocket::identifySocket() {
-    this->setUpAddress(this->activePORT);
-    if (bind(this->socketMaster, (struct sockaddr*) &this->address, sizeof(struct sockaddr)) < 0) {
-        perror("error binding socket");
-        return ReturnStatus::FAILURE;
+    this->address = LibraryWrapper::Socket::setUpSocketAddress(this->activePORT);
+    if (LibraryWrapper::Socket::bindSocketSuccessfully(this->socketMaster, this->address)) {
+        return ReturnStatus::SUCCESS;
     }
-    return ReturnStatus::SUCCESS;
+
+    perror("Error binding socket");
+    return ReturnStatus::FAILURE;
 }
 
 ReturnStatus SimpleHTTPServer::TCPSocket::makeSocketListening() const {
-    if (listen(this->socketMaster, SimpleHTTPServer::maximumPendingConnections) < 0) {
-        perror("Listening already");
-        return ReturnStatus::FAILURE;
+    if (LibraryWrapper::Socket::listenOnSocketSuccessfully(this->socketMaster,
+                                                           SimpleHTTPServer::maximumPendingConnections)) {
+        return ReturnStatus::SUCCESS;
     }
-    return ReturnStatus::SUCCESS;
+
+    perror("Error listening socket");
+    return ReturnStatus::FAILURE;
 }

@@ -6,6 +6,7 @@
 #include <map>
 
 #include <libs/EPollUtility.h>
+#include <libs/SocketUtility.h>
 
 ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
     addNewConnection(this->myTcpSocket->getSocketMaster());
@@ -14,18 +15,19 @@ ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
         for (int i = 0; i < numberFDs; ++i) {
             auto socketFileDescriptor = this->epollEvents[i].data.fd;
             if (this->isSocketMaster(socketFileDescriptor)) {
-                sockaddr clientAddress{};
-                socklen_t clientAddressLength = sizeof(clientAddress);
-                int newSocket = accept(this->myTcpSocket->getSocketMaster(), &clientAddress, &clientAddressLength);
+                int newSocket = LibraryWrapper::Socket::acceptNewConnection(this->myTcpSocket->getSocketMaster());
 
-                if (newSocket < 0) {
-                    perror("Accepting!");
+                if (LibraryWrapper::Socket::createSocketSuccessfully(newSocket)) {
+                    SimpleHTTPServer::HTTPServer::addNewConnection(newSocket);
+                } else {
+                    perror("Error accepting new connection!");
                     return ReturnStatus::FAILURE;
                 }
-                SimpleHTTPServer::HTTPServer::addNewConnection(newSocket);
             } else {
                 if (LibraryWrapper::EPoll::errorOccurredWithEPollEvent(this->epollEvents[i])
-                    || LibraryWrapper::EPoll::clientClosedTheConnection(this->epollEvents[i])) {
+                    ||
+                    LibraryWrapper::EPoll::clientClosedTheConnection(this->epollEvents[i])) {
+
                     SimpleHTTPServer::HTTPServer::closeConnection(socketFileDescriptor);
                 } else {
                     this->server.handleRequest(socketFileDescriptor);
@@ -47,7 +49,7 @@ void SimpleHTTPServer::HTTPServer::addNewConnection(const int &socketFileDescrip
 SimpleHTTPServer::HTTPServer::HTTPServer() {
     this->myTcpSocket = std::make_unique<TCPSocket>();
     this->epollEvents.resize(SimpleHTTPServer::maximumConnections + 1);
-    this->epollContext = epoll_create(SimpleHTTPServer::maximumConnections + 1);
+    this->epollContext = LibraryWrapper::EPoll::creatEPollContext(SimpleHTTPServer::maximumConnections + 1);
 }
 
 void SimpleHTTPServer::HTTPServer::start() {

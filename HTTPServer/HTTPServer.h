@@ -19,6 +19,7 @@ namespace SimpleHTTPServer {
         int epollContext = 0;
         void addNewConnection(const int &socketFileDescriptor) const;
         void closeConnection(const int &socketFileDescriptor) const;
+
         [[nodiscard]] bool isSocketMaster(const int &socketFileDescriptor) const {
             return socketFileDescriptor == this->myTcpSocket->getSocketMaster();
         }

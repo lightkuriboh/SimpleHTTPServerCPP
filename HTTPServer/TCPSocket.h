@@ -17,10 +17,9 @@ namespace SimpleHTTPServer {
         sockaddr_in address{};
 
         ReturnStatus createSocket();
-        ReturnStatus socketOptions();
         ReturnStatus identifySocket();
+        [[nodiscard]] ReturnStatus socketOptions() const;
         [[nodiscard]] ReturnStatus makeSocketListening() const;
-        void setUpAddress(int port);
 
         int socketMaster = 0;
     public:
