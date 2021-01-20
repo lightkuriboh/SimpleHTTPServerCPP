@@ -7,15 +7,12 @@ set(CMAKE_CXX_FLAGS "-pthread -I..")
 
 add_executable(SimpleCPPServer
         main.cpp
-        SignalHandler/SignalHandler.h
-        SignalHandler/SignalHandler.cpp
         libs/EPollUtility.h
         libs/EPollUtility.cpp
         libs/SocketUtility.h
         libs/SocketUtility.cpp
-        ApplicationServer/Server.h
-        ApplicationServer/MyServer.h
-        ApplicationServer/MyServer.cpp
+        ApplicationServer/ApplicationServer.h
+        ApplicationServer/ApplicationServer.cpp
         ApplicationServer/Requests/RESTInformation.h
         ApplicationServer/Requests/RESTInformation.cpp
         ApplicationServer/Requests/RequestHandlers.h

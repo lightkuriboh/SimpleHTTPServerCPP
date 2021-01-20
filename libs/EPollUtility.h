@@ -2,6 +2,10 @@
 #ifndef SIMPLECPPSERVER_EPOLLUTILITY_H
 #define SIMPLECPPSERVER_EPOLLUTILITY_H
 
+#include "sys/epoll.h"
+
+#include <vector>
+
 namespace LibraryWrapper {
     class EPoll {
     private:
@@ -10,6 +14,10 @@ namespace LibraryWrapper {
     public:
         static void removeFromEpoll(const int &context, const int &socketFileDescriptor);
         static void addToEpoll(const int &context, const int &socketFileDescriptor);
+
+        static int getChangedEPollEvents(const int &ePollContext, std::vector<epoll_event>& epollEvents);
+        static bool errorOccurredWithEPollEvent(const epoll_event &ePollEvent);
+        static bool clientClosedTheConnection(const epoll_event &ePollEvent);
     };
 }
 

@@ -1,5 +1,5 @@
 
-#include "MyServer.h"
+#include "ApplicationServer.h"
 
 #include <unistd.h>
 
@@ -11,10 +11,10 @@
 #include "ServerConstants.h"
 #include "utils/OtherUtils.h"
 
-void SimpleHTTPServer::MyServer::handleRequest(const int &sockfd) {
+void SimpleHTTPServer::ApplicationServer::handleRequest(const int &socketFileDescriptor) {
     char buffer[SimpleHTTPServer::bufferSize] = {0};
 
-    auto readValue = read(sockfd, buffer, sizeof(buffer));
+    auto readValue = read(socketFileDescriptor, buffer, sizeof(buffer));
 
     if (readValue <= 0) {
         return;
@@ -31,7 +31,7 @@ void SimpleHTTPServer::MyServer::handleRequest(const int &sockfd) {
     auto [method, endPoint] = SimpleHTTPServer::REST_INFORMATION::parseInformation(reqInfo);
 
     if (method == this->GET && endPoint == "/") {
-        respondBack(sockfd, SimpleHTTPServer::RequestHandler::getIndexPage());
+        respondBack(socketFileDescriptor, SimpleHTTPServer::RequestHandler::getIndexPage());
         return;
     }
 
@@ -46,33 +46,33 @@ void SimpleHTTPServer::MyServer::handleRequest(const int &sockfd) {
         isGetStaticHTML = true;
     }
     if (isGetStaticHTML) {
-        SimpleHTTPServer::MyServer::respondBack(sockfd, resp);
+        SimpleHTTPServer::ApplicationServer::respondBack(socketFileDescriptor, resp);
     } else {
         if (method == this->GET) {
             endPoint = Utils::OtherUtils::normalizeString(endPoint);
 
-            this->threadPool.enqueue([] (const int sockfd, const std::string &endPoint) {
-                SimpleHTTPServer::MyServer::transferFile(sockfd, endPoint);
-            }, sockfd, endPoint);
+            this->threadPool.enqueue([] (const int socketFileDescriptor, const std::string &endPoint) {
+                SimpleHTTPServer::ApplicationServer::transferFile(socketFileDescriptor, endPoint);
+            }, socketFileDescriptor, endPoint);
         }
     }
 }
 
-SimpleHTTPServer::MyServer::MyServer() {
+SimpleHTTPServer::ApplicationServer::ApplicationServer() {
     this->staticHTMLs = std::make_unique<std::map<std::string, std::string>>();
     this->getStaticHTMLs();
 }
 
-void SimpleHTTPServer::MyServer::respondBack(const int &sockfd, const std::string &resp) {
+void SimpleHTTPServer::ApplicationServer::respondBack(const int &sockfd, const std::string &resp) {
     auto signal = write(sockfd, &*resp.begin(), strlen(&*resp.begin()));
 }
 
-void SimpleHTTPServer::MyServer::getStaticHTMLs() {
+void SimpleHTTPServer::ApplicationServer::getStaticHTMLs() {
     this->getStaticHTML("index", "index.html");
     this->getStaticHTML("about", "about.html");
 }
 
-void SimpleHTTPServer::MyServer::getStaticHTML(const std::string &name, const std::string &htmlFile) {
+void SimpleHTTPServer::ApplicationServer::getStaticHTML(const std::string &name, const std::string &htmlFile) {
     (*this->staticHTMLs)[name] = "";
     std::ifstream fi(SimpleHTTPServer::resourcesFolder + htmlFile);
     std::string line;
@@ -82,7 +82,7 @@ void SimpleHTTPServer::MyServer::getStaticHTML(const std::string &name, const st
     fi.close();
 }
 
-void SimpleHTTPServer::MyServer::transferFile(const int &sockfd, const std::string &endPoint) {
+void SimpleHTTPServer::ApplicationServer::transferFile(const int &socketFileDescriptor, const std::string &endPoint) {
     std::string fileName;
     auto n = endPoint.size();
     for (auto i = 1; i < n; i++) {
@@ -94,13 +94,13 @@ void SimpleHTTPServer::MyServer::transferFile(const int &sockfd, const std::stri
     auto fileLength = Utils::OtherUtils::getFileSize(filePath);
     if (fileLength < 0) {
         auto header = SimpleHTTPServer::RequestHandler::getHeader(14, fileType, 500);
-        SimpleHTTPServer::MyServer::respondBack(sockfd, header);
-        SimpleHTTPServer::MyServer::respondBack(sockfd, "File not found");
+        SimpleHTTPServer::ApplicationServer::respondBack(socketFileDescriptor, header);
+        SimpleHTTPServer::ApplicationServer::respondBack(socketFileDescriptor, "File not found");
         return;
     }
 
     auto header = SimpleHTTPServer::RequestHandler::getHeader(fileLength, fileType, 200);
-    SimpleHTTPServer::MyServer::respondBack(sockfd, header);
+    SimpleHTTPServer::ApplicationServer::respondBack(socketFileDescriptor, header);
 
     char send_buffer[SimpleHTTPServer::bufferSize];
     FILE *sendFile = fopen(filePath.c_str(), "r");
@@ -111,7 +111,7 @@ void SimpleHTTPServer::MyServer::transferFile(const int &sockfd, const std::stri
         char *send_buffer_ptr = send_buffer;
 
         while (numRead > 0) {
-            int numSent = write(sockfd, send_buffer_ptr, numRead);
+            int numSent = write(socketFileDescriptor, send_buffer_ptr, numRead);
             if (numSent < 1) {// 0 if disconnected, otherwise error
                 break; // timeout or error
             }

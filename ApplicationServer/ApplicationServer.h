@@ -1,15 +1,14 @@
 
-#ifndef SIMPLECPPSERVER_MYSERVER_H
-#define SIMPLECPPSERVER_MYSERVER_H
+#ifndef SIMPLECPPSERVER_APPLICATIONSERVER_H
+#define SIMPLECPPSERVER_APPLICATIONSERVER_H
 
 #include <map>
 
-#include "Server.h"
 #include "HTTPServer/TCPSocket.h"
 #include "utils/ThreadPool.h"
 
 namespace SimpleHTTPServer {
-    class MyServer : public Server {
+    class ApplicationServer {
     private:
         ThreadPool threadPool = ThreadPool(std::thread::hardware_concurrency());
 
@@ -18,12 +17,12 @@ namespace SimpleHTTPServer {
         void getStaticHTMLs();
         std::unique_ptr<std::map<std::string, std::string>> staticHTMLs = nullptr;
         void getStaticHTML(const std::string &name, const std::string &htmlFile);
-        static void transferFile(const int &sockfd, const std::string &endPoint);
-        static void respondBack(const int &sockfd, const std::string &resp);
+        static void transferFile(const int &socketFileDescriptor, const std::string &endPoint);
+        static void respondBack(const int &socketFileDescriptor, const std::string &resp);
     public:
-        MyServer();
-        void handleRequest(const int &sockfd) override;
+        ApplicationServer();
+        void handleRequest(const int &socketFileDescriptor);
     };
 }
 
-#endif //SIMPLECPPSERVER_MYSERVER_H
+#endif //SIMPLECPPSERVER_APPLICATIONSERVER_H
