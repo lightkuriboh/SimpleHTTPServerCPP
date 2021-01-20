@@ -59,16 +59,8 @@ void SimpleHTTPServer::MyServer::handleRequest(const int &sockfd) {
 }
 
 SimpleHTTPServer::MyServer::MyServer() {
-    this->tcpSocket = std::make_unique<SimpleHTTPServer::TCPSocket>();
-    this->tcpSocket->initServer(std::unique_ptr<SimpleHTTPServer::Server>(this));
     this->staticHTMLs = std::make_unique<std::map<std::string, std::string>>();
     this->getStaticHTMLs();
-}
-
-SimpleHTTPServer::MyServer::~MyServer() = default;
-
-void SimpleHTTPServer::MyServer::start() {
-    this->tcpSocket->start();
 }
 
 void SimpleHTTPServer::MyServer::respondBack(const int &sockfd, const std::string &resp) {

@@ -5,7 +5,7 @@
 #include <map>
 
 #include "Server.h"
-#include "Socket/TCPSocket.h"
+#include "HTTPServer/TCPSocket.h"
 #include "utils/ThreadPool.h"
 
 namespace SimpleHTTPServer {
@@ -15,7 +15,6 @@ namespace SimpleHTTPServer {
 
         const std::string GET = "GET";
 
-        std::unique_ptr<SimpleHTTPServer::TCPSocket> tcpSocket = nullptr;
         void getStaticHTMLs();
         std::unique_ptr<std::map<std::string, std::string>> staticHTMLs = nullptr;
         void getStaticHTML(const std::string &name, const std::string &htmlFile);
@@ -23,8 +22,6 @@ namespace SimpleHTTPServer {
         static void respondBack(const int &sockfd, const std::string &resp);
     public:
         MyServer();
-        ~MyServer() override;
-        void start();
         void handleRequest(const int &sockfd) override;
     };
 }

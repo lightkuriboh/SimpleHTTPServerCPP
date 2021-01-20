@@ -1,1 +1,1 @@
-./install.sh && ./build/DTLMiniProject
+./install.sh && ./build/SimpleCPPServer

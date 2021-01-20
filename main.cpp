@@ -1,11 +1,11 @@
 
-#include "Server/MyServer.h"
+#include "HTTPServer/HTTPServer.h"
 #include "SignalHandler/SignalHandler.h"
 
 int main() {
     Signals::setSignalHandlers();
 
-    SimpleCPPServer::MyServer myServer = SimpleCPPServer::MyServer();
+    SimpleHTTPServer::HTTPServer myServer = SimpleHTTPServer::HTTPServer();
     myServer.start();
 
     return 0;

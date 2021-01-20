@@ -13,7 +13,6 @@ void Signals::setSignalHandlers() {
 }
 
 void Signals::keyboardInterruptHandler(int signalNumber) {
-    close(SimpleHTTPServer::PORT);
     exit(signalNumber);
 }
 
