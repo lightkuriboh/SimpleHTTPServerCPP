@@ -1,11 +1,10 @@
 
 #include "HTTPServer/TCPSocket.h"
 
-#include <unistd.h>
-
 #include <iostream>
 
 #include "libs/SocketUtility.h"
+#include "libs/UnixStandardUtility.h"
 
 SimpleHTTPServer::TCPSocket::TCPSocket() {
     if (this->createSocket() == ReturnStatus::SUCCESS) {
@@ -17,7 +16,7 @@ SimpleHTTPServer::TCPSocket::TCPSocket() {
                 }
             }
         }
-        close(this->socketMaster);
+        LibraryWrapper::UnixStandard::closeFileDescriptor(this->socketMaster);
     }
     exit(1);
 }

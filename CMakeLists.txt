@@ -11,18 +11,20 @@ add_executable(SimpleCPPServer
         libs/EPollUtility.cpp
         libs/SocketUtility.h
         libs/SocketUtility.cpp
+        libs/UnixStandardUtility.h
+        libs/UnixStandardUtility.cpp
         ApplicationServer/ApplicationServer.h
         ApplicationServer/ApplicationServer.cpp
         ApplicationServer/Requests/RESTInformation.h
         ApplicationServer/Requests/RESTInformation.cpp
         ApplicationServer/Requests/RequestHandlers.h
         ApplicationServer/Requests/RequestHandlers.cpp
-        utils/OtherUtils.h
-        utils/OtherUtils.cpp
-        constants.h
         ApplicationServer/ServerConstants.h
         HTTPServer/HTTPServer.h
         HTTPServer/HTTPServer.cpp
         HTTPServer/TCPSocket.h
         HTTPServer/TCPSocket.cpp
+        utils/OtherUtils.h
+        utils/OtherUtils.cpp
+        constants.h
 )

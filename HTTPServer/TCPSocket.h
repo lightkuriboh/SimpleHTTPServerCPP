@@ -9,16 +9,15 @@
 namespace SimpleHTTPServer {
     class TCPSocket {
     private:
+        sockaddr_in address{};
         int socketOption = 0;
         int activePORT = SimpleHTTPServer::PORT;
-        sockaddr_in address{};
+        int socketMaster = 0;
 
         ReturnStatus createSocket();
         ReturnStatus identifySocket();
         [[nodiscard]] ReturnStatus socketOptions() const;
         [[nodiscard]] ReturnStatus makeSocketListening() const;
-
-        int socketMaster = 0;
     public:
         TCPSocket();
 

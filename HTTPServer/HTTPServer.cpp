@@ -1,12 +1,9 @@
 
 #include "HTTPServer/HTTPServer.h"
 
-#include <unistd.h>
-
-#include <map>
-
 #include <libs/EPollUtility.h>
 #include <libs/SocketUtility.h>
+#include <libs/UnixStandardUtility.h>
 
 ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
     addNewConnection(this->myTcpSocket->getSocketMaster());
@@ -39,7 +36,7 @@ ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
 
 void SimpleHTTPServer::HTTPServer::closeConnection(const int &socketFileDescriptor) const {
     LibraryWrapper::EPoll::removeFromEpoll(this->epollContext, socketFileDescriptor);
-    close(socketFileDescriptor);
+    LibraryWrapper::UnixStandard::closeFileDescriptor(socketFileDescriptor);
 }
 
 void SimpleHTTPServer::HTTPServer::addNewConnection(const int &socketFileDescriptor) const {
