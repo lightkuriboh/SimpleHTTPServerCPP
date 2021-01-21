@@ -6,6 +6,7 @@
 
 namespace SimpleHTTPServer {
     const std::string resourcesFolder = "resources/";
+    const int ioBufferSize = 2048;
 }
 
 #endif //DTLMINIPROJECT_SERVERCONSTANTS_H

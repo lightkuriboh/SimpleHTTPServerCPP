@@ -26,5 +26,7 @@ add_executable(SimpleCPPServer
         HTTPServer/TCPSocket.cpp
         utils/OtherUtils.h
         utils/OtherUtils.cpp
+        utils/ConfigParser.h
+        utils/ConfigParser.cpp
         constants.h
 )

@@ -6,13 +6,15 @@
 #include <libs/UnixStandardUtility.h>
 
 ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
-    addNewConnection(this->myTcpSocket->getSocketMaster());
+    addNewConnection(this->myTcpSocket.getSocketMaster());
     while (true) {
         int numberFDs = LibraryWrapper::EPoll::getChangedEPollEvents(this->epollContext, this->epollEvents);
         for (int i = 0; i < numberFDs; ++i) {
             auto socketFileDescriptor = this->epollEvents[i].data.fd;
             if (this->isSocketMaster(socketFileDescriptor)) {
-                int newSocket = LibraryWrapper::Socket::acceptNewConnection(this->myTcpSocket->getSocketMaster());
+                int newSocket = LibraryWrapper::Socket::acceptNewConnection(
+                this->myTcpSocket.getSocketMaster()
+                );
 
                 if (LibraryWrapper::Socket::createSocketSuccessfully(newSocket)) {
                     SimpleHTTPServer::HTTPServer::addNewConnection(newSocket);
@@ -44,7 +46,6 @@ void SimpleHTTPServer::HTTPServer::addNewConnection(const int &socketFileDescrip
 }
 
 SimpleHTTPServer::HTTPServer::HTTPServer() {
-    this->myTcpSocket = std::make_unique<TCPSocket>();
     this->epollEvents.resize(SimpleHTTPServer::maximumConnections + 1);
     this->epollContext = LibraryWrapper::EPoll::creatEPollContext(SimpleHTTPServer::maximumConnections + 1);
 }

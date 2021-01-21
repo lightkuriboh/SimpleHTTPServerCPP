@@ -58,7 +58,8 @@ void SimpleHTTPServer::ApplicationServer::handleRequest(const int &socketFileDes
     }
 }
 
-SimpleHTTPServer::ApplicationServer::ApplicationServer() {
+SimpleHTTPServer::ApplicationServer::ApplicationServer(Utils::Config config) {
+    this->resourceFolder = config.getResourceFolder();
     this->staticHTMLs = std::make_unique<std::map<std::string, std::string>>();
     this->getStaticHTMLs();
 }
@@ -74,7 +75,7 @@ void SimpleHTTPServer::ApplicationServer::getStaticHTMLs() {
 
 void SimpleHTTPServer::ApplicationServer::getStaticHTML(const std::string &name, const std::string &htmlFile) {
     (*this->staticHTMLs)[name] = "";
-    std::ifstream fi(SimpleHTTPServer::resourcesFolder + htmlFile);
+    std::ifstream fi(this->resourceFolder + htmlFile);
     std::string line;
     while (getline(fi, line)) {
         (*this->staticHTMLs)[name] += line;

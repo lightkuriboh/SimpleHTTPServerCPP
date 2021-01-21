@@ -5,12 +5,15 @@
 #include <map>
 
 #include "HTTPServer/TCPSocket.h"
+#include "utils/ConfigParser.h"
 #include "utils/ThreadPool.h"
 
 namespace SimpleHTTPServer {
     class ApplicationServer {
     private:
         ThreadPool threadPool = ThreadPool(std::thread::hardware_concurrency());
+
+        std::string resourceFolder = "resources/";
 
         const std::string GET = "GET";
 
@@ -20,7 +23,7 @@ namespace SimpleHTTPServer {
         static void transferFile(const int &socketFileDescriptor, const std::string &endPoint);
         static void respondBack(const int &socketFileDescriptor, const std::string &resp);
     public:
-        ApplicationServer();
+        ApplicationServer(Utils::Config config);
         void handleRequest(const int &socketFileDescriptor);
     };
 }
