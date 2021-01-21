@@ -1,8 +1,6 @@
 
 #include "EPollUtility.h"
 
-#include <unistd.h>
-
 void LibraryWrapper::EPoll::updateToEPoll(const int &context, const int &socketFileDescriptor,
                                           unsigned int ePollEvent, int actionType) {
     epoll_event event = epoll_event();
