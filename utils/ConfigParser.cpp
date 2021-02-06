@@ -24,3 +24,7 @@ std::pair<std::string, std::string> Utils::Config::splitConfig(const std::string
     return std::make_pair(inputStr.substr(0, equationQuotePos),
                           inputStr.substr(equationQuotePos + 1, n - equationQuotePos - 1));
 }
+
+std::variant<int, std::string> Utils::Config::getMapValue(const std::string& key) const {
+    return (*this->configMap.find(key)).second;
+}

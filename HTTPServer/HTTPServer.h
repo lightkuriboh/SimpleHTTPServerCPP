@@ -14,7 +14,7 @@ namespace SimpleHTTPServer {
     class HTTPServer {
     private:
         Utils::Config config = Utils::Config();
-        TCPSocket myTcpSocket = SimpleHTTPServer::TCPSocket();
+        TCPSocket myTcpSocket = SimpleHTTPServer::TCPSocket(config);
         SimpleHTTPServer::ApplicationServer server = SimpleHTTPServer::ApplicationServer(config);
 
         std::vector<epoll_event> epollEvents;

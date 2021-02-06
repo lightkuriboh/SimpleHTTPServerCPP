@@ -46,8 +46,8 @@ void SimpleHTTPServer::HTTPServer::addNewConnection(const int &socketFileDescrip
 }
 
 SimpleHTTPServer::HTTPServer::HTTPServer() {
-    this->epollEvents.resize(SimpleHTTPServer::maximumConnections + 1);
-    this->epollContext = LibraryWrapper::EPoll::creatEPollContext(SimpleHTTPServer::maximumConnections + 1);
+    this->epollEvents.resize(this->config.getMaximumConnections() + 1);
+    this->epollContext = LibraryWrapper::EPoll::creatEPollContext(this->config.getMaximumConnections() + 1);
 }
 
 void SimpleHTTPServer::HTTPServer::start() {

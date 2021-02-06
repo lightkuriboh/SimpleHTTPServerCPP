@@ -6,7 +6,9 @@
 #include "libs/SocketUtility.h"
 #include "libs/UnixStandardUtility.h"
 
-SimpleHTTPServer::TCPSocket::TCPSocket() {
+SimpleHTTPServer::TCPSocket::TCPSocket(const Utils::Config &config) {
+    this->initConfig(config);
+
     if (this->createSocket() == ReturnStatus::SUCCESS) {
         if (this->socketOptions() == ReturnStatus::SUCCESS) {
             if (this->identifySocket() == ReturnStatus::SUCCESS) {
@@ -52,10 +54,15 @@ ReturnStatus SimpleHTTPServer::TCPSocket::identifySocket() {
 
 ReturnStatus SimpleHTTPServer::TCPSocket::makeSocketListening() const {
     if (LibraryWrapper::Socket::listenOnSocketSuccessfully(this->socketMaster,
-                                                           SimpleHTTPServer::maximumPendingConnections)) {
+                                                           this->maximumPendingConnection)) {
         return ReturnStatus::SUCCESS;
     }
 
     perror("Error listening socket");
     return ReturnStatus::FAILURE;
+}
+
+void SimpleHTTPServer::TCPSocket::initConfig(const Utils::Config &config) {
+    this->activePORT = config.getPort();
+    this->maximumPendingConnection = config.getMaximumPendingConnections();
 }

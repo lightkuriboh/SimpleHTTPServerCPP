@@ -9,22 +9,23 @@
 namespace Utils {
     class Config {
     private:
-        std::map<std::string, std::variant<int, std::string> > configMap;
-
         static std::pair<std::string, std::string> splitConfig(const std::string& inputStr);
+
+        std::map<std::string, std::variant<int, std::string>> configMap;
+        [[nodiscard]] std::variant<int, std::string> getMapValue(const std::string& key) const;
     public:
         Config();
-        [[nodiscard]] int getPort() {
-            return std::get<int>(this->configMap["PORT"]);
+        [[nodiscard]] int getPort() const {
+            return std::get<int>(this->getMapValue("PORT"));
         }
-        [[nodiscard]] int getMaximumConnections() {
-            return std::get<int>(this->configMap["MAXIMUM_CONNECTIONS"]);
+        [[nodiscard]] int getMaximumConnections() const {
+            return std::get<int>(this->getMapValue("MAXIMUM_CONNECTIONS"));
         }
-        [[nodiscard]] int getMaximumPendingConnections() {
-            return std::get<int>(this->configMap["MAXIMUM_PENDING_CONNECTIONS"]);
+        [[nodiscard]] int getMaximumPendingConnections() const {
+            return std::get<int>(this->getMapValue("MAXIMUM_PENDING_CONNECTIONS"));
         }
-        [[nodiscard]] std::string getResourceFolder() {
-            return std::get<std::string>(this->configMap["RESOURCE_FOLDER"]);
+        [[nodiscard]] std::string getResourceFolder() const {
+            return std::get<std::string>(this->getMapValue("RESOURCE_FOLDER"));
         }
     };
 }
