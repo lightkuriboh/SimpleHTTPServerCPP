@@ -6,7 +6,7 @@
 #include <libs/UnixStandardUtility.h>
 
 ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
-    addNewConnection(this->myTcpSocket.getSocketMaster());
+    this->addNewConnection(this->myTcpSocket.getSocketMaster());
     while (true) {
         int numberFDs = LibraryWrapper::EPoll::getChangedEPollEvents(this->epollContext, this->epollEvents);
         for (int i = 0; i < numberFDs; ++i) {
@@ -17,7 +17,7 @@ ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
                 );
 
                 if (LibraryWrapper::Socket::createSocketSuccessfully(newSocket)) {
-                    SimpleHTTPServer::HTTPServer::addNewConnection(newSocket);
+                    this->addNewConnection(newSocket);
                 } else {
                     perror("Error accepting new connection!");
                     return ReturnStatus::FAILURE;
@@ -27,7 +27,7 @@ ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
                     ||
                     LibraryWrapper::EPoll::clientClosedTheConnection(this->epollEvents[i])) {
 
-                    SimpleHTTPServer::HTTPServer::closeConnection(socketFileDescriptor);
+                    this->closeConnection(socketFileDescriptor);
                 } else {
                     this->server.handleRequest(socketFileDescriptor);
                 }

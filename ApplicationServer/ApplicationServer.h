@@ -23,7 +23,7 @@ namespace SimpleHTTPServer {
         static void transferFile(const int &socketFileDescriptor, const std::string &endPoint);
         static void respondBack(const int &socketFileDescriptor, const std::string &resp);
     public:
-        ApplicationServer(Utils::Config config);
+        explicit ApplicationServer(const Utils::Config& config);
         void handleRequest(const int &socketFileDescriptor);
     };
 }
