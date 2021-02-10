@@ -4,8 +4,8 @@
 #include <unistd.h>
 
 #include <fstream>
-#include <cstring>
 
+#include "libs/UnixStandardUtility.h"
 #include "Requests/RESTInformation.h"
 #include "Requests/RequestHandlers.h"
 #include "ServerConstants.h"
@@ -31,7 +31,10 @@ void SimpleHTTPServer::ApplicationServer::handleRequest(const int &socketFileDes
     auto [method, endPoint] = SimpleHTTPServer::REST_INFORMATION::parseInformation(reqInfo);
 
     if (method == this->GET && endPoint == "/") {
-        respondBack(socketFileDescriptor, SimpleHTTPServer::RequestHandler::getIndexPage());
+        LibraryWrapper::UnixStandard::writeToSockFd(
+                socketFileDescriptor,
+                SimpleHTTPServer::RequestHandler::getIndexPage()
+        );
         return;
     }
 
@@ -46,7 +49,10 @@ void SimpleHTTPServer::ApplicationServer::handleRequest(const int &socketFileDes
         isGetStaticHTML = true;
     }
     if (isGetStaticHTML) {
-        SimpleHTTPServer::ApplicationServer::respondBack(socketFileDescriptor, resp);
+        LibraryWrapper::UnixStandard::writeToSockFd(
+                socketFileDescriptor,
+                resp
+        );
     } else {
         if (method == this->GET) {
             endPoint = Utils::OtherUtils::normalizeString(endPoint);
@@ -62,10 +68,6 @@ SimpleHTTPServer::ApplicationServer::ApplicationServer(const Utils::Config& conf
     this->resourceFolder = config.getResourceFolder();
     this->staticHTMLs = std::make_unique<std::map<std::string, std::string>>();
     this->getStaticHTMLs();
-}
-
-void SimpleHTTPServer::ApplicationServer::respondBack(const int &sockfd, const std::string &resp) {
-    auto signal = write(sockfd, &*resp.begin(), strlen(&*resp.begin()));
 }
 
 void SimpleHTTPServer::ApplicationServer::getStaticHTMLs() {
@@ -95,13 +97,13 @@ void SimpleHTTPServer::ApplicationServer::transferFile(const int &socketFileDesc
     auto fileLength = Utils::OtherUtils::getFileSize(filePath);
     if (fileLength < 0) {
         auto header = SimpleHTTPServer::RequestHandler::getHeader(14, fileType, 500);
-        SimpleHTTPServer::ApplicationServer::respondBack(socketFileDescriptor, header);
-        SimpleHTTPServer::ApplicationServer::respondBack(socketFileDescriptor, "File not found");
+        LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, header);
+        LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, "File not found");
         return;
     }
 
     auto header = SimpleHTTPServer::RequestHandler::getHeader(fileLength, fileType, 200);
-    SimpleHTTPServer::ApplicationServer::respondBack(socketFileDescriptor, header);
+    LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, header);
 
     char send_buffer[SimpleHTTPServer::bufferSize];
     FILE *sendFile = fopen(filePath.c_str(), "r");

@@ -21,7 +21,6 @@ namespace SimpleHTTPServer {
         std::unique_ptr<std::map<std::string, std::string>> staticHTMLs = nullptr;
         void getStaticHTML(const std::string &name, const std::string &htmlFile);
         static void transferFile(const int &socketFileDescriptor, const std::string &endPoint);
-        static void respondBack(const int &socketFileDescriptor, const std::string &resp);
     public:
         explicit ApplicationServer(const Utils::Config& config);
         void handleRequest(const int &socketFileDescriptor);
