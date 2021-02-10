@@ -13,8 +13,6 @@ add_executable(SimpleCPPServer
         libs/SocketUtility.cpp
         libs/UnixStandardUtility.h
         libs/UnixStandardUtility.cpp
-        ApplicationServer/ApplicationServer.h
-        ApplicationServer/ApplicationServer.cpp
         ApplicationServer/Requests/RESTInformation.h
         ApplicationServer/Requests/RESTInformation.cpp
         ApplicationServer/Requests/RequestHandlers.h

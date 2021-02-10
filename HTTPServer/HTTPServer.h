@@ -6,19 +6,26 @@
 
 #include <vector>
 
-#include "ApplicationServer/ApplicationServer.h"
 #include "HTTPServer/TCPSocket.h"
 #include "utils/ConfigParser.h"
+#include "utils/ThreadPool.h"
 
 namespace SimpleHTTPServer {
     class HTTPServer {
     private:
         Utils::Config config = Utils::Config();
         TCPSocket myTcpSocket = SimpleHTTPServer::TCPSocket(config);
-        SimpleHTTPServer::ApplicationServer server = SimpleHTTPServer::ApplicationServer(config);
+        ThreadPool threadPool = ThreadPool(std::thread::hardware_concurrency());
 
         std::vector<epoll_event> epollEvents;
         int epollContext = 0;
+
+        std::string resourceFolder = "resources/";
+        void getAllStaticHTMLs();
+        std::map<std::string, std::string> staticHTMLs;
+        void getStaticHTML(const std::string &name, const std::string &htmlFile);
+
+        void handleRequest(const int &socketFileDescriptor);
 
         void addNewConnection(const int &socketFileDescriptor) const;
         void closeConnection(const int &socketFileDescriptor) const;
@@ -31,6 +38,8 @@ namespace SimpleHTTPServer {
 
         HTTPServer();
         void start();
+
+        static void transferFile(const int &socketFileDescriptor, const std::string &endPoint);
     };
 }
 
