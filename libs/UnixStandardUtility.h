@@ -9,6 +9,7 @@ namespace LibraryWrapper {
     public:
         static void closeFileDescriptor(const int &fileDescriptor);
 
+        static int writeToSockFd(const int &socketFileDescriptor, char const *bufferPtr, const int &bufferSize);
         static void writeToSockFd(const int &socketFileDescriptor, const std::string &resp);
     };
 };
