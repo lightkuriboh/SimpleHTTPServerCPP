@@ -3,9 +3,7 @@
 
 #include <set>
 
-#include "utils/OtherUtils.h"
-
-std::string SimpleHTTPServer::RequestHandler::contentType(const std::string &fileType) {
+std::string SimpleHTTPServer::RFCWrapper::contentType(const std::string &fileType) {
     std::string ans = "Content-Type: ";
 
     std::set<std::string> textFiles = {"html", "css", "js"};
@@ -28,26 +26,24 @@ std::string SimpleHTTPServer::RequestHandler::contentType(const std::string &fil
     return ans;
 }
 
-std::string SimpleHTTPServer::RequestHandler::resp(const std::string &html) {
-    std::string result = SimpleHTTPServer::RequestHandler::getHeader(html.size(), "html", 200) + html;
+std::string SimpleHTTPServer::RFCWrapper::resp(const std::string &html) {
+    std::string result = SimpleHTTPServer::RFCWrapper::getHeader(html.size(), "html", 200) + html;
     return result;
 }
 
-std::string SimpleHTTPServer::RequestHandler::responseStatus(const int &statusCode) {
+std::string SimpleHTTPServer::RFCWrapper::responseStatus(const int &statusCode) {
     std::string ans = "200 OK\n";
-    if (statusCode != 200) {
-
-    }
+    if (statusCode != 200) {}
     return ans;
 }
 
 std::string
-SimpleHTTPServer::RequestHandler::getHeader(const int &contentLength, const std::string &fileType, const int &statusCode) {
+SimpleHTTPServer::RFCWrapper::getHeader(const int &contentLength, const std::string &fileType, const int &statusCode) {
     return "HTTP/1.1 "
-           + SimpleHTTPServer::RequestHandler::responseStatus(statusCode)
-           + SimpleHTTPServer::RequestHandler::contentType(fileType)
+           + SimpleHTTPServer::RFCWrapper::responseStatus(statusCode)
+           + SimpleHTTPServer::RFCWrapper::contentType(fileType)
            + "Content-Length: "
-           + Utils::OtherUtils::intToString(contentLength)
+           + std::to_string(contentLength)
            + "\n\n"
         ;
 }

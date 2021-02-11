@@ -6,6 +6,7 @@
 
 #include "HardConfig.h"
 #include "utils/ConfigParser.h"
+#include "utils/ReturnStatus.h"
 
 namespace SimpleHTTPServer {
     class TCPSocket {

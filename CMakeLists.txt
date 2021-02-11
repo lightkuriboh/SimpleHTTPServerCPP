@@ -7,26 +7,23 @@ set(CMAKE_CXX_FLAGS "-pthread -I..")
 
 add_executable(SimpleCPPServer
         main.cpp
+        HTTPServer/HardConfig.h
+        HTTPServer/HTTPServer.h
+        HTTPServer/HTTPServer.cpp
+        HTTPServer/RESTInformation.h
+        HTTPServer/RESTInformation.cpp
+        HTTPServer/TCPSocket.h
+        HTTPServer/TCPSocket.cpp
         libs/EPollUtility.h
         libs/EPollUtility.cpp
+        libs/RFCWrapper.h
+        libs/RFCWrapper.cpp
         libs/SocketUtility.h
         libs/SocketUtility.cpp
         libs/UnixStandardUtility.h
         libs/UnixStandardUtility.cpp
-        HTTPServer/RESTInformation.h
-        HTTPServer/RESTInformation.cpp
-        libs/RFCWrapper.h
-        libs/RFCWrapper.cpp
-        HTTPServer/ServerConstants.h
-        HTTPServer/HTTPServer.h
-        HTTPServer/HTTPServer.cpp
-        HTTPServer/TCPSocket.h
-        HTTPServer/TCPSocket.cpp
+        utils/CommonUtils.h
         utils/ConfigParser.h
-        utils/ConfigParser.cpp
         utils/FileUtils.h
-        utils/FileUtils.cpp
-        utils/OtherUtils.h
-        utils/OtherUtils.cpp
-        HTTPServer/HardConfig.h
+        utils/ReturnStatus.h
 )

@@ -9,6 +9,7 @@
 #include "HTTPServer/TCPSocket.h"
 #include "utils/ConfigParser.h"
 #include "utils/ThreadPool.h"
+#include "utils/ReturnStatus.h"
 
 namespace SimpleHTTPServer {
     class HTTPServer {
@@ -22,7 +23,7 @@ namespace SimpleHTTPServer {
 
         std::string resourceFolder = "resources/";
         void getAllStaticFiles();
-        std::map<std::string, std::string> staticHTMLs;
+        std::map<std::string, std::string> staticTextContents;
         void getTextFileContent(const std::string &fileName);
 
         void handleRequest(const int &socketFileDescriptor);
@@ -33,13 +34,13 @@ namespace SimpleHTTPServer {
         [[nodiscard]] bool isSocketMaster(const int &socketFileDescriptor) const {
             return socketFileDescriptor == this->myTcpSocket.getSocketMaster();
         }
+
+        static void transferFile(const int &socketFileDescriptor, const std::string &filePath);
     public:
         ReturnStatus listeningConnections();
 
         HTTPServer();
         void start();
-
-        static void transferFile(const int &socketFileDescriptor, const std::string &endPoint);
     };
 }
 

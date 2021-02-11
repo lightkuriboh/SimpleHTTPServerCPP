@@ -5,7 +5,7 @@
 #include <string>
 
 namespace SimpleHTTPServer {
-    class RequestHandler {
+    class RFCWrapper {
     public:
         static std::string resp(const std::string &html);
         static std::string getHeader(const int &contentLength, const std::string &fileType, const int &statusCode);

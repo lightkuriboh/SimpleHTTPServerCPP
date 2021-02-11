@@ -1,18 +1,12 @@
 
 #include "HTTPServer/HTTPServer.h"
 
-#include "unistd.h"
-
-#include <fstream>
-
 #include "libs/EPollUtility.h"
 #include "libs/RFCWrapper.h"
 #include "libs/SocketUtility.h"
 #include "libs/UnixStandardUtility.h"
 #include "RESTInformation.h"
-#include "ServerConstants.h"
 #include "utils/FileUtils.h"
-#include "utils/OtherUtils.h"
 
 ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
     this->addNewConnection(this->myTcpSocket.getSocketMaster());
@@ -71,11 +65,11 @@ void SimpleHTTPServer::HTTPServer::getAllStaticFiles() {
 }
 
 void SimpleHTTPServer::HTTPServer::getTextFileContent(const std::string &fileName) {
-    this->staticHTMLs[fileName] = "";
+    this->staticTextContents[fileName] = "";
     std::ifstream fi(this->resourceFolder + fileName);
     std::string line;
     while (getline(fi, line)) {
-        this->staticHTMLs[fileName] += line;
+        this->staticTextContents[fileName] += line;
     }
     fi.close();
 }
@@ -92,65 +86,65 @@ void SimpleHTTPServer::HTTPServer::handleRequest(const int &socketFileDescriptor
         if (endPoint == "/") {
             LibraryWrapper::UnixStandard::writeToSockFd(
                     socketFileDescriptor,
-                    RequestHandler::resp(this->staticHTMLs["index.html"])
+                    RFCWrapper::resp(this->staticTextContents["index.html"])
             );
             return;
         }
         if (auto filePath = endPoint.substr(1, (int)endPoint.length() - 1);
-            this->staticHTMLs.find(filePath) != this->staticHTMLs.end()) {
+            this->staticTextContents.find(filePath) != this->staticTextContents.end()) {
             LibraryWrapper::UnixStandard::writeToSockFd(
                     socketFileDescriptor,
-                    RequestHandler::resp(this->staticHTMLs[filePath])
+                    RFCWrapper::resp(this->staticTextContents[filePath])
             );
             return;
         }
         if (Utils::FileUtils::isFilePath(endPoint)) {
-            this->threadPool.enqueue([] (const int socketFileDescriptor, const std::string &endPoint) {
-                SimpleHTTPServer::HTTPServer::transferFile(socketFileDescriptor, endPoint);
+            this->threadPool.enqueue([this] (const int socketFileDescriptor, const std::string &endPoint) {
+                SimpleHTTPServer::HTTPServer::transferFile(socketFileDescriptor,
+                                                           this->resourceFolder + endPoint.substr(
+                                                                   1, (int)endPoint.length() - 1)
+                                                           );
             }, socketFileDescriptor, endPoint);
             return;
         }
     }
 }
 
-void SimpleHTTPServer::HTTPServer::transferFile(const int &socketFileDescriptor, const std::string &endPoint) {
-    std::string fileName;
-    auto n = endPoint.size();
-    for (auto i = 1; i < n; i++) {
-        fileName += endPoint[i];
-    }
-    auto fileType = Utils::OtherUtils::getFileType(fileName);
-    auto filePath = SimpleHTTPServer::resourcesFolder + fileName;
+void SimpleHTTPServer::HTTPServer::transferFile(const int &socketFileDescriptor, const std::string &filePath) {
+    auto fileType = Utils::FileUtils::getFileType(filePath);
 
-    auto fileLength = Utils::OtherUtils::getFileSize(filePath);
+    auto fileLength = Utils::FileUtils::getFileSize(filePath);
     if (fileLength < 0) {
-        auto header = SimpleHTTPServer::RequestHandler::getHeader(14, fileType, 500);
+        auto header = SimpleHTTPServer::RFCWrapper::getHeader(14, fileType, 500);
         LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, header);
         LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, "File not found");
         return;
     }
 
-    auto header = SimpleHTTPServer::RequestHandler::getHeader(fileLength, fileType, 200);
+    auto header = SimpleHTTPServer::RFCWrapper::getHeader(fileLength, fileType, 200);
     LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, header);
 
     char send_buffer[SimpleHTTPServer::HardConfig::ioBufferSize];
-    FILE *sendFile = fopen(filePath.c_str(), "r");
-    while (sendFile && !feof(sendFile)) {
-        int numRead = fread(send_buffer, sizeof(unsigned char), SimpleHTTPServer::HardConfig::ioBufferSize, sendFile);
-        if( numRead < 1 ) break; // EOF or error
+    std::unique_ptr<FILE> sendFile(fopen(filePath.c_str(), "r"));
 
-        char *send_buffer_ptr = send_buffer;
+    while (sendFile && !feof(sendFile.get())) {
+        int numRead = fread(
+                send_buffer,
+                sizeof(unsigned char),
+                SimpleHTTPServer::HardConfig::ioBufferSize, sendFile.get()
+        );
+        if (numRead <= 0) break;
+
+        auto send_buffer_ptr = send_buffer;
 
         while (numRead > 0) {
-            int numSent = write(socketFileDescriptor, send_buffer_ptr, numRead);
-            if (numSent < 1) {// 0 if disconnected, otherwise error
-                break; // timeout or error
+            int numSent = LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, send_buffer_ptr, numRead);
+            if (numSent <= 1) {
+                break;
             }
             send_buffer_ptr += numSent;
             numRead -= numSent;
         }
-
     }
-    fclose(sendFile);
 }
 

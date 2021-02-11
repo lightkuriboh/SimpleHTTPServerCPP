@@ -1,7 +1,7 @@
 
 #include "RESTInformation.h"
 
-#include "utils/OtherUtils.h"
+#include "utils/CommonUtils.h"
 
 SimpleHTTPServer::REST_INFORMATION
 SimpleHTTPServer::REST_INFORMATION::parseInformation(const std::string &requestContent) {
@@ -25,5 +25,5 @@ SimpleHTTPServer::REST_INFORMATION::parseInformation(const std::string &requestC
             }
         }
     }
-    return SimpleHTTPServer::REST_INFORMATION (method, Utils::OtherUtils::normalizeString(endPoint));
+    return SimpleHTTPServer::REST_INFORMATION (method, Utils::CommonUtils::normalizeString(endPoint));
 }
