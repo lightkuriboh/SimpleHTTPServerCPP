@@ -33,9 +33,6 @@ ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
                     this->closeConnection(socketFileDescriptor);
                 } else {
                     this->handleRequest(socketFileDescriptor);
-//                    this->threadPool.enqueue([this] (const int &socketFileDescriptor) {
-//                        this->handleRequest(socketFileDescriptor);
-//                    }, socketFileDescriptor);
                 }
             }
         }
@@ -110,10 +107,6 @@ void SimpleHTTPServer::HTTPServer::handleRequest(const int &socketFileDescriptor
                 );
             }, socketFileDescriptor, this->resourceFolder + endPoint.substr(
                     1, (int)endPoint.length() - 1));
-//            SimpleHTTPServer::HTTPServer::transferFile(socketFileDescriptor,
-//                                                       this->resourceFolder + endPoint.substr(
-//                                                               1, (int)endPoint.length() - 1)
-//                                                       );
             return;
         }
     }
