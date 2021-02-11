@@ -62,7 +62,6 @@ void SimpleHTTPServer::HTTPServer::start() {
 void SimpleHTTPServer::HTTPServer::getAllStaticFiles() {
     this->getTextFileContent("index.html");
     this->getTextFileContent("about.html");
-    this->getTextFileContent("about.css");
     this->getTextFileContent("about.js");
 }
 
