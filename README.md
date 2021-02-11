@@ -8,7 +8,7 @@ $ ./first_time_run.sh
 # Run
 $ ./run.sh
 ```
-* You may need to increase OpenFiles Limit (ulimit -n) to larger number (i.e. 20000) in local environment to handle more connections. 
+* You may need to increase the Open Files Limitation to a larger number (i.e. ```20000```) in local environment to handle more connections. 
 
 #### WRK (FOR PERFORMANCE TESTING)  
 ```
