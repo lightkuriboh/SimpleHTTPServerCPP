@@ -33,6 +33,9 @@ ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
                     this->closeConnection(socketFileDescriptor);
                 } else {
                     this->handleRequest(socketFileDescriptor);
+//                    this->threadPool.enqueue([this] (const int &socketFileDescriptor) {
+//                        this->handleRequest(socketFileDescriptor);
+//                    }, socketFileDescriptor);
                 }
             }
         }
@@ -62,6 +65,8 @@ void SimpleHTTPServer::HTTPServer::start() {
 void SimpleHTTPServer::HTTPServer::getAllStaticFiles() {
     this->getTextFileContent("index.html");
     this->getTextFileContent("about.html");
+    this->getTextFileContent("about.css");
+    this->getTextFileContent("about.js");
 }
 
 void SimpleHTTPServer::HTTPServer::getTextFileContent(const std::string &fileName) {
@@ -99,12 +104,16 @@ void SimpleHTTPServer::HTTPServer::handleRequest(const int &socketFileDescriptor
             return;
         }
         if (Utils::FileUtils::isFilePath(endPoint)) {
-            this->threadPool.enqueue([this] (const int socketFileDescriptor, const std::string &endPoint) {
+            this->threadPool.enqueue([] (const int socketFileDescriptor, const std::string &filePath) {
                 SimpleHTTPServer::HTTPServer::transferFile(socketFileDescriptor,
-                                                           this->resourceFolder + endPoint.substr(
-                                                                   1, (int)endPoint.length() - 1)
-                                                           );
-            }, socketFileDescriptor, endPoint);
+                                                           filePath
+                );
+            }, socketFileDescriptor, this->resourceFolder + endPoint.substr(
+                    1, (int)endPoint.length() - 1));
+//            SimpleHTTPServer::HTTPServer::transferFile(socketFileDescriptor,
+//                                                       this->resourceFolder + endPoint.substr(
+//                                                               1, (int)endPoint.length() - 1)
+//                                                       );
             return;
         }
     }

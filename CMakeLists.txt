@@ -26,4 +26,5 @@ add_executable(SimpleCPPServer
         utils/ConfigParser.h
         utils/FileUtils.h
         utils/ReturnStatus.h
+        utils/SignalHandlers.h
 )
