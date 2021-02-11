@@ -6,11 +6,12 @@
 #include <fstream>
 
 #include "libs/EPollUtility.h"
+#include "libs/RFCWrapper.h"
 #include "libs/SocketUtility.h"
 #include "libs/UnixStandardUtility.h"
-#include "ApplicationServer/Requests/RESTInformation.h"
-#include "ApplicationServer/Requests/RequestHandlers.h"
-#include "ApplicationServer/ServerConstants.h"
+#include "RESTInformation.h"
+#include "ServerConstants.h"
+#include "utils/FileUtils.h"
 #include "utils/OtherUtils.h"
 
 ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
@@ -57,77 +58,57 @@ SimpleHTTPServer::HTTPServer::HTTPServer() {
     this->epollEvents.resize(this->config.getMaximumConnections() + 1);
     this->epollContext = LibraryWrapper::EPoll::creatEPollContext(this->config.getMaximumConnections() + 1);
     this->resourceFolder = this->config.getResourceFolder();
-    this->getAllStaticHTMLs();
+    this->getAllStaticFiles();
 }
 
 void SimpleHTTPServer::HTTPServer::start() {
     this->listeningConnections();
 }
 
-void SimpleHTTPServer::HTTPServer::getAllStaticHTMLs() {
-    this->getStaticHTML("index", "index.html");
-    this->getStaticHTML("about", "about.html");
+void SimpleHTTPServer::HTTPServer::getAllStaticFiles() {
+    this->getTextFileContent("index.html");
+    this->getTextFileContent("about.html");
 }
 
-void SimpleHTTPServer::HTTPServer::getStaticHTML(const std::string &name, const std::string &htmlFile) {
-    this->staticHTMLs[name] = "";
-    std::ifstream fi(this->resourceFolder + htmlFile);
+void SimpleHTTPServer::HTTPServer::getTextFileContent(const std::string &fileName) {
+    this->staticHTMLs[fileName] = "";
+    std::ifstream fi(this->resourceFolder + fileName);
     std::string line;
     while (getline(fi, line)) {
-        this->staticHTMLs[name] += line;
+        this->staticHTMLs[fileName] += line;
     }
     fi.close();
 }
 
 void SimpleHTTPServer::HTTPServer::handleRequest(const int &socketFileDescriptor) {
-    char buffer[SimpleHTTPServer::bufferSize] = {0};
+    auto requestContent = LibraryWrapper::UnixStandard::readFromSocketFileDescriptor(
+            socketFileDescriptor,
+            SimpleHTTPServer::HardConfig::ioBufferSize
+    );
 
-    auto readValue = read(socketFileDescriptor, buffer, sizeof(buffer));
+    auto [method, endPoint] = SimpleHTTPServer::REST_INFORMATION::parseInformation(requestContent);
 
-    if (readValue <= 0) {
-        return;
-    }
-
-    std::string reqInfo;
-    for (auto i = 0; i < readValue; ++i) {
-        if (buffer[i] == '\n') {
-            break;
+    if (method == "GET") {
+        if (endPoint == "/") {
+            LibraryWrapper::UnixStandard::writeToSockFd(
+                    socketFileDescriptor,
+                    RequestHandler::resp(this->staticHTMLs["index.html"])
+            );
+            return;
         }
-        reqInfo += buffer[i];
-    }
-
-    auto [method, endPoint] = SimpleHTTPServer::REST_INFORMATION::parseInformation(reqInfo);
-
-    if (method == "GET" && endPoint == "/") {
-        LibraryWrapper::UnixStandard::writeToSockFd(
-                socketFileDescriptor,
-                SimpleHTTPServer::RequestHandler::getIndexPage()
-        );
-        return;
-    }
-
-    std::string content = this->staticHTMLs["index"];
-    std::string resp = RequestHandler::resp(content);
-
-    auto isGetStaticHTML = false;
-
-    if (method == "GET" && endPoint == "/about") {
-        content = this->staticHTMLs["about"];
-        resp = RequestHandler::resp(content);
-        isGetStaticHTML = true;
-    }
-    if (isGetStaticHTML) {
-        LibraryWrapper::UnixStandard::writeToSockFd(
-                socketFileDescriptor,
-                resp
-        );
-    } else {
-        if (method == "GET") {
-            endPoint = Utils::OtherUtils::normalizeString(endPoint);
-
+        if (auto filePath = endPoint.substr(1, (int)endPoint.length() - 1);
+            this->staticHTMLs.find(filePath) != this->staticHTMLs.end()) {
+            LibraryWrapper::UnixStandard::writeToSockFd(
+                    socketFileDescriptor,
+                    RequestHandler::resp(this->staticHTMLs[filePath])
+            );
+            return;
+        }
+        if (Utils::FileUtils::isFilePath(endPoint)) {
             this->threadPool.enqueue([] (const int socketFileDescriptor, const std::string &endPoint) {
                 SimpleHTTPServer::HTTPServer::transferFile(socketFileDescriptor, endPoint);
             }, socketFileDescriptor, endPoint);
+            return;
         }
     }
 }
@@ -152,10 +133,10 @@ void SimpleHTTPServer::HTTPServer::transferFile(const int &socketFileDescriptor,
     auto header = SimpleHTTPServer::RequestHandler::getHeader(fileLength, fileType, 200);
     LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, header);
 
-    char send_buffer[SimpleHTTPServer::bufferSize];
+    char send_buffer[SimpleHTTPServer::HardConfig::ioBufferSize];
     FILE *sendFile = fopen(filePath.c_str(), "r");
     while (sendFile && !feof(sendFile)) {
-        int numRead = fread(send_buffer, sizeof(unsigned char), SimpleHTTPServer::bufferSize, sendFile);
+        int numRead = fread(send_buffer, sizeof(unsigned char), SimpleHTTPServer::HardConfig::ioBufferSize, sendFile);
         if( numRead < 1 ) break; // EOF or error
 
         char *send_buffer_ptr = send_buffer;

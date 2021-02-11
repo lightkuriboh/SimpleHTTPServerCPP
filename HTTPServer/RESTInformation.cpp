@@ -1,10 +1,16 @@
 
 #include "RESTInformation.h"
 
-SimpleHTTPServer::REST_INFORMATION SimpleHTTPServer::REST_INFORMATION::parseInformation(const std::string &info) {
+#include "utils/OtherUtils.h"
+
+SimpleHTTPServer::REST_INFORMATION
+SimpleHTTPServer::REST_INFORMATION::parseInformation(const std::string &requestContent) {
     std::string method, endPoint;
     auto methodSet = false;
-    for (const auto &ch: info) {
+    for (const auto &ch: requestContent) {
+        if (ch == '\n') {
+            break;
+        }
         if (ch == ' ') {
             if (!methodSet) {
                 methodSet = true;
@@ -19,10 +25,5 @@ SimpleHTTPServer::REST_INFORMATION SimpleHTTPServer::REST_INFORMATION::parseInfo
             }
         }
     }
-    return SimpleHTTPServer::REST_INFORMATION (method, endPoint);
-}
-
-SimpleHTTPServer::REST_INFORMATION::REST_INFORMATION(const std::string &_method, const std::string &_endPoint) {
-    this->method = _method;
-    this->endPoint = _endPoint;
+    return SimpleHTTPServer::REST_INFORMATION (method, Utils::OtherUtils::normalizeString(endPoint));
 }

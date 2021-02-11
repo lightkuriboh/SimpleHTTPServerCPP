@@ -4,7 +4,7 @@
 
 #include "FileUtils.h"
 
-#include "ApplicationServer/Requests/RequestHandlers.h"
+#include "libs/RFCWrapper.h"
 #include "libs/UnixStandardUtility.h"
 #include "utils/OtherUtils.h"
 
@@ -40,5 +40,15 @@ void Utils::FileUtils::transferFile(const int &socketFileDescriptor, const std::
         }
     }
     fclose(sendFile);
+}
+
+bool Utils::FileUtils::isFilePath(const std::string& str) {
+    auto n = (int)str.size();
+    for (auto i = n - 1; i >= 0; --i) {
+        if (str[i] == '.' && i != n - 1) {
+            return true;
+        }
+    }
+    return false;
 }
 

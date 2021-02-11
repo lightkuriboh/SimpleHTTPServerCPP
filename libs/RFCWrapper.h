@@ -1,6 +1,6 @@
 
-#ifndef SIMPLECPPSERVER_REQUESTHANDLERS_H
-#define SIMPLECPPSERVER_REQUESTHANDLERS_H
+#ifndef SIMPLECPPSERVER_RFCWRAPPER_H
+#define SIMPLECPPSERVER_RFCWRAPPER_H
 
 #include <string>
 
@@ -11,8 +11,7 @@ namespace SimpleHTTPServer {
         static std::string getHeader(const int &contentLength, const std::string &fileType, const int &statusCode);
         static std::string contentType(const std::string &fileType);
         static std::string responseStatus(const int &statusCode);
-        static std::string getIndexPage();
     };
 }
 
-#endif //SIMPLECPPSERVER_REQUESTHANDLERS_H
+#endif //SIMPLECPPSERVER_RFCWRAPPER_H

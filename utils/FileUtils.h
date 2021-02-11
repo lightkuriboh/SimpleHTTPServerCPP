@@ -11,6 +11,8 @@ namespace Utils {
     class FileUtils {
     public:
         static void transferFile(const int &socketFileDescriptor, const std::string &filePath);
+
+        static bool isFilePath(const std::string& str);
     };
 }
 

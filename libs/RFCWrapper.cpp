@@ -1,5 +1,5 @@
 
-#include "RequestHandlers.h"
+#include "RFCWrapper.h"
 
 #include <set>
 
@@ -50,8 +50,4 @@ SimpleHTTPServer::RequestHandler::getHeader(const int &contentLength, const std:
            + Utils::OtherUtils::intToString(contentLength)
            + "\n\n"
         ;
-}
-
-std::string SimpleHTTPServer::RequestHandler::getIndexPage() {
-    return "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 107\n\n<html><body style='color:red;text-align:center'>Hello world<br><hr><a href='/about'>About</a></body></html>";
 }

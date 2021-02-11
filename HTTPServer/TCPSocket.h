@@ -4,7 +4,7 @@
 
 #include <netinet/in.h>
 
-#include "constants.h"
+#include "HardConfig.h"
 #include "utils/ConfigParser.h"
 
 namespace SimpleHTTPServer {

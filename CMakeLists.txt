@@ -13,11 +13,11 @@ add_executable(SimpleCPPServer
         libs/SocketUtility.cpp
         libs/UnixStandardUtility.h
         libs/UnixStandardUtility.cpp
-        ApplicationServer/Requests/RESTInformation.h
-        ApplicationServer/Requests/RESTInformation.cpp
-        ApplicationServer/Requests/RequestHandlers.h
-        ApplicationServer/Requests/RequestHandlers.cpp
-        ApplicationServer/ServerConstants.h
+        HTTPServer/RESTInformation.h
+        HTTPServer/RESTInformation.cpp
+        libs/RFCWrapper.h
+        libs/RFCWrapper.cpp
+        HTTPServer/ServerConstants.h
         HTTPServer/HTTPServer.h
         HTTPServer/HTTPServer.cpp
         HTTPServer/TCPSocket.h
@@ -28,5 +28,5 @@ add_executable(SimpleCPPServer
         utils/FileUtils.cpp
         utils/OtherUtils.h
         utils/OtherUtils.cpp
-        constants.h
+        HTTPServer/HardConfig.h
 )

@@ -11,6 +11,8 @@ namespace LibraryWrapper {
 
         static int writeToSockFd(const int &socketFileDescriptor, char const *bufferPtr, const int &bufferSize);
         static void writeToSockFd(const int &socketFileDescriptor, const std::string &resp);
+
+        static std::string readFromSocketFileDescriptor(const int &socketFileDescriptor, const int &bufferSize);
     };
 };
 

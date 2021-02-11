@@ -17,3 +17,13 @@ int LibraryWrapper::UnixStandard::writeToSockFd(const int &socketFileDescriptor,
                                                  const int &bufferSize) {
     return write(socketFileDescriptor, bufferPtr, bufferSize);
 }
+
+std::string LibraryWrapper::UnixStandard::readFromSocketFileDescriptor(
+        const int &socketFileDescriptor, const int &bufferSize) {
+    std::string buffer(bufferSize, 0);
+    auto readValue = read(socketFileDescriptor, &buffer[0], buffer.size());
+    if (readValue < 0) {
+        return "";
+    }
+    return buffer.substr(0, readValue);
+}

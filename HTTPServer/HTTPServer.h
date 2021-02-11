@@ -21,9 +21,9 @@ namespace SimpleHTTPServer {
         int epollContext = 0;
 
         std::string resourceFolder = "resources/";
-        void getAllStaticHTMLs();
+        void getAllStaticFiles();
         std::map<std::string, std::string> staticHTMLs;
-        void getStaticHTML(const std::string &name, const std::string &htmlFile);
+        void getTextFileContent(const std::string &fileName);
 
         void handleRequest(const int &socketFileDescriptor);
 
