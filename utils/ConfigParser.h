@@ -24,7 +24,7 @@ namespace Utils {
         }
     public:
         Config() {
-            std::ifstream configReader("../config.cfg");
+            std::ifstream configReader("config.cfg");
             std::string eachLine;
             while (configReader && configReader >> eachLine) {
                 auto configInfo = splitConfig(eachLine);

@@ -1,3 +1,2 @@
-./install.sh &&
-cd build || exit &&
-./SimpleCPPServer
+./build.sh
+./build/SimpleCPPServer
