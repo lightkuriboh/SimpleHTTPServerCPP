@@ -73,7 +73,9 @@ void SimpleHTTPServer::HTTPServer::getTextFileContent(const std::string &fileNam
     while (getline(fi, line)) {
         this->staticTextContents[fileName] += line;
     }
-    fi.close();
+    if (fi) {
+        fi.close();
+    }
 }
 
 void SimpleHTTPServer::HTTPServer::handleRequest(const int &socketFileDescriptor) {

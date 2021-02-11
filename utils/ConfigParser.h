@@ -26,7 +26,7 @@ namespace Utils {
         Config() {
             std::ifstream configReader("../config.cfg");
             std::string eachLine;
-            while (configReader >> eachLine) {
+            while (configReader && configReader >> eachLine) {
                 auto configInfo = splitConfig(eachLine);
                 try {
                     auto intValue = std::stoi(configInfo.second);
@@ -35,7 +35,9 @@ namespace Utils {
                     this->configMap[configInfo.first] = configInfo.second.substr(1, configInfo.second.length() - 2);
                 }
             }
-            configReader.close();
+            if (configReader) {
+                configReader.close();
+            }
         }
         [[nodiscard]] int getPort() const {
             return std::get<int>(this->getMapValue("PORT"));
