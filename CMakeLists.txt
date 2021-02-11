@@ -10,8 +10,6 @@ add_executable(SimpleCPPServer
         HTTPServer/HardConfig.h
         HTTPServer/HTTPServer.h
         HTTPServer/HTTPServer.cpp
-        HTTPServer/RESTInformation.h
-        HTTPServer/RESTInformation.cpp
         HTTPServer/TCPSocket.h
         HTTPServer/TCPSocket.cpp
         libs/EPollUtility.h

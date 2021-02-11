@@ -5,7 +5,6 @@
 #include "libs/RFCWrapper.h"
 #include "libs/SocketUtility.h"
 #include "libs/UnixStandardUtility.h"
-#include "RESTInformation.h"
 #include "utils/FileUtils.h"
 
 ReturnStatus SimpleHTTPServer::HTTPServer::listeningConnections() {
@@ -83,13 +82,13 @@ void SimpleHTTPServer::HTTPServer::handleRequest(const int &socketFileDescriptor
             SimpleHTTPServer::HardConfig::ioBufferSize
     );
 
-    auto [method, endPoint] = SimpleHTTPServer::REST_INFORMATION::parseInformation(requestContent);
+    auto [method, endPoint] = LibraryWrapper::RFCWrapper::parseRESTInformation(requestContent);
 
     if (method == "GET") {
         if (endPoint == "/") {
             LibraryWrapper::UnixStandard::writeToSockFd(
                     socketFileDescriptor,
-                    RFCWrapper::resp(this->staticTextContents["index.html"])
+                    LibraryWrapper::RFCWrapper::response(this->staticTextContents["index.html"])
             );
             return;
         }
@@ -97,7 +96,7 @@ void SimpleHTTPServer::HTTPServer::handleRequest(const int &socketFileDescriptor
             this->staticTextContents.find(filePath) != this->staticTextContents.end()) {
             LibraryWrapper::UnixStandard::writeToSockFd(
                     socketFileDescriptor,
-                    RFCWrapper::resp(this->staticTextContents[filePath])
+                    LibraryWrapper::RFCWrapper::response(this->staticTextContents[filePath])
             );
             return;
         }
@@ -118,13 +117,13 @@ void SimpleHTTPServer::HTTPServer::transferFile(const int &socketFileDescriptor,
 
     auto fileLength = Utils::FileUtils::getFileSize(filePath);
     if (fileLength < 0) {
-        auto header = SimpleHTTPServer::RFCWrapper::getHeader(14, fileType, 500);
+        auto header = LibraryWrapper::RFCWrapper::getHeader(14, fileType, 500);
         LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, header);
         LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, "File not found");
         return;
     }
 
-    auto header = SimpleHTTPServer::RFCWrapper::getHeader(fileLength, fileType, 200);
+    auto header = LibraryWrapper::RFCWrapper::getHeader(fileLength, fileType, 200);
     LibraryWrapper::UnixStandard::writeToSockFd(socketFileDescriptor, header);
 
     char send_buffer[SimpleHTTPServer::HardConfig::ioBufferSize];
